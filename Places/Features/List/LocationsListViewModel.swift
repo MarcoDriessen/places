@@ -17,7 +17,15 @@ final class LocationsListViewModel {
     case error(Error? = nil) // use domain error
   }
   
+  enum BottomSheetState {
+    case idle
+    case loading
+    case error(Error? = nil)
+  }
+  
   private(set) var viewState: ViewState = .loading
+  private(set) var bottomSheetState: BottomSheetState = .idle
+  
   var showBottomSheet: Bool = false
   private var locations: [LocationViewEntity] = []
   
@@ -37,7 +45,6 @@ final class LocationsListViewModel {
   }
   
   func fetchLocations() async {
-    // Move url elsewhere
     do {
       let url = URL(string: "https://raw.githubusercontent.com/abnamrocoesd/assignment-ios/main/locations.json")!
       let places: Places = try await networkService.fetch(from: url)
@@ -51,7 +58,6 @@ final class LocationsListViewModel {
   }
   
   func didTap(location: LocationViewEntity) {
-    
     guard let name = location.name else {
       viewState = .error()
       return
@@ -84,13 +90,13 @@ final class LocationsListViewModel {
   }
   
   func addLocation(latitude: String, longitude: String) async {
-    viewState = .loading
+    bottomSheetState = .loading
     
     let formattedLatitude = latitude.replacingOccurrences(of: ",", with: ".")
     let formattedLongitude = longitude.replacingOccurrences(of: ",", with: ".")
     
     guard let latitude = Double(formattedLatitude), let longitude = Double(formattedLongitude) else {
-      viewState = .error()
+      bottomSheetState = .error()
       return
     }
     
@@ -98,14 +104,16 @@ final class LocationsListViewModel {
       let name = try await reverseGeocodable.reverseGeocode(latitude: latitude,
                                                             longitude: longitude)
       guard !locations.contains(where: { $0.name == name }) else {
+        bottomSheetState = .idle
         return
       }
       let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
       locations.append(location)
       viewState = .success(locations)
+      bottomSheetState = .idle
       showBottomSheet = false
     } catch {
-      viewState = .error()
+      bottomSheetState = .error(error)
     }
   }
   
@@ -116,6 +124,7 @@ final class LocationsListViewModel {
     let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
     locations.append(location)
     viewState = .success(locations)
+    bottomSheetState = .idle
     showBottomSheet = false
   }
 }

@@ -13,7 +13,7 @@ struct LocationsListView: View {
   @State private var viewModel: LocationsListViewModel
     
   init(viewModel: LocationsListViewModel) {
-    _viewModel = State(wrappedValue: viewModel) // check this
+    _viewModel = State(wrappedValue: viewModel)
   }
   
   var body: some View {
@@ -47,17 +47,26 @@ struct LocationsListView: View {
         }
       }
       .sheet(isPresented: $viewModel.showBottomSheet) {
-        SearchView(didSetLocationName: { locationName in
-          viewModel.addLocation(name: locationName)
-        }, didSetCoordinates: { coordinates in
-          Task {
-            await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        VStack {
+          switch viewModel.bottomSheetState {
+          case .idle:
+            SearchView(didSetLocationName: { locationName in
+              viewModel.addLocation(name: locationName)
+            }, didSetCoordinates: { coordinates in
+              Task {
+                await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+              }
+            })
+          case .loading:
+            ProgressView("Searching Location...")
+          case .error:
+            Text("ERROR")
           }
-        })
+        }
         .presentationDetents([.medium])
       }
     case .error(let error):
-      Text(error?.localizedDescription ?? "") // fix domain error
+      Text(error?.localizedDescription ?? "")
     }
   }
 }
