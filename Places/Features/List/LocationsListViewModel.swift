@@ -18,6 +18,7 @@ final class LocationsListViewModel {
   }
   
   private(set) var viewState: ViewState = .loading
+  var showBottomSheet: Bool = false
   private var locations: [LocationViewEntity] = []
   
   private let networkService: NetworkService
@@ -102,6 +103,7 @@ final class LocationsListViewModel {
       let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
       locations.append(location)
       viewState = .success(locations)
+      showBottomSheet = false
     } catch {
       viewState = .error()
     }
@@ -114,6 +116,7 @@ final class LocationsListViewModel {
     let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
     locations.append(location)
     viewState = .success(locations)
+    showBottomSheet = false
   }
 }
 

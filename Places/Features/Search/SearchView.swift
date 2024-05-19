@@ -25,6 +25,7 @@ struct SearchView: View {
   var body: some View {
     VStack {
       Text("Add Location")
+
       Picker("", selection: $selectedIndex) {
         Text("Name").tag(SelectedIndex.name)
         Text("Coordinates").tag(SelectedIndex.coordinates)
@@ -36,7 +37,7 @@ struct SearchView: View {
       case .coordinates: searchByCoordinatesView
       }
     }
-    .padding([.leading, .trailing])
+    .padding()
   }
   
   @ViewBuilder
@@ -44,6 +45,8 @@ struct SearchView: View {
     TextField("Location", text: $locationName)
       .textFieldStyle(.roundedBorder)
 
+    Spacer()
+    
     Button("Add") {
       didSetLocationName(locationName)
       locationName = ""
@@ -61,10 +64,21 @@ struct SearchView: View {
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
 
+      Spacer()
+      
       Button("Search") {
         didSetCoordinates((latitude: latitude, longitude: longitude))
       }
       .buttonStyle(.borderedProminent)
     }
   }
+}
+
+#Preview {
+  SearchView { _ in
+    
+  } didSetCoordinates: { _ in
+    
+  }
+
 }

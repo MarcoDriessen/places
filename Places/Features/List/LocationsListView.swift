@@ -20,6 +20,13 @@ struct LocationsListView: View {
     NavigationView {
       content
         .navigationTitle("Locations")
+        .toolbar {
+          Button {
+            viewModel.showBottomSheet = true
+          } label: {
+           Image(systemName: "plus")
+          }
+        }
         .task {
           await viewModel.fetchLocations()
         }
@@ -38,6 +45,8 @@ struct LocationsListView: View {
             viewModel.didTap(location: location)
           }
         }
+      }
+      .sheet(isPresented: $viewModel.showBottomSheet) {
         SearchView(didSetLocationName: { locationName in
           viewModel.addLocation(name: locationName)
         }, didSetCoordinates: { coordinates in
@@ -45,6 +54,7 @@ struct LocationsListView: View {
             await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
           }
         })
+        .presentationDetents([.medium])
       }
     case .error(let error):
       Text(error?.localizedDescription ?? "") // fix domain error
