@@ -8,5 +8,5 @@
 import Foundation
 
 struct Places: Decodable {
-    let locations: [Location]
+  let locations: [Location]
 }
