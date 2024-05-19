@@ -10,14 +10,15 @@ import UIKit
 
 @Observable
 final class LocationsListViewModel {
-  
+
   enum ViewState {
     case loading
-    case success([Location])
+    case success([LocationViewEntity])
     case error(Error? = nil) // use domain error
   }
   
   private(set) var viewState: ViewState = .loading
+  private var locations: [LocationViewEntity] = []
   
   private let networkService: NetworkService
   private let urlComposable: URLComposable
@@ -39,13 +40,16 @@ final class LocationsListViewModel {
     do {
       let url = URL(string: "https://raw.githubusercontent.com/abnamrocoesd/assignment-ios/main/locations.json")!
       let places: Places = try await networkService.fetch(from: url)
-      viewState = .success(places.locations.filter { $0.name != nil })
+      locations = places.locations
+        .filter { $0.name != nil }
+        .map { $0.toLocationViewEntity() }
+      viewState = .success(locations)
     } catch {
       viewState = .error(error)
     }
   }
   
-  func didTap(location: Location) {
+  func didTap(location: LocationViewEntity) {
     
     guard let name = location.name else {
       viewState = .error()
@@ -78,8 +82,7 @@ final class LocationsListViewModel {
     urlOpenable.open(deeplinkUrl, options: [:], completionHandler: nil)
   }
   
-  func addLocation(with latitude: String, longitude: String) async {
-    
+  func addLocation(latitude: String, longitude: String) async {
     viewState = .loading
     
     let formattedLatitude = latitude.replacingOccurrences(of: ",", with: ".")
@@ -93,9 +96,41 @@ final class LocationsListViewModel {
     do {
       let name = try await reverseGeocodable.reverseGeocode(latitude: latitude,
                                                             longitude: longitude)
-      //            viewState = .success(name)
+      guard !locations.contains(where: { $0.name == name }) else {
+        return
+      }
+      let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
+      locations.append(location)
+      viewState = .success(locations)
     } catch {
       viewState = .error()
     }
+  }
+  
+  func addLocation(name: String) {
+    guard !locations.contains(where: { $0.name == name }) else {
+      return
+    }
+    let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
+    locations.append(location)
+    viewState = .success(locations)
+  }
+}
+
+extension LocationsListViewModel {
+  struct LocationViewEntity: Equatable, Identifiable {
+    var id = UUID()
+    let name: String?
+    let latitude: Double?
+    let longitude: Double?
+  }
+}
+
+extension Location {
+  fileprivate func toLocationViewEntity() -> LocationsListViewModel.LocationViewEntity {
+    LocationsListViewModel.LocationViewEntity(
+      name: name,
+      latitude: lat,
+      longitude: long)
   }
 }

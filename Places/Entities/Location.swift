@@ -13,9 +13,3 @@ struct Location: Decodable {
   let lat: CLLocationDegrees
   let long: CLLocationDegrees
 }
-
-extension Location: Identifiable {
-  var id: Double { lat + long } // fix this
-}
-
-extension Location: Equatable { }
