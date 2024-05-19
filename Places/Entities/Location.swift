@@ -9,7 +9,13 @@ import Foundation
 import CoreLocation
 
 struct Location: Decodable {
-    let name: String
+    let name: String?
     let lat: CLLocationDegrees
     let long: CLLocationDegrees
 }
+
+extension Location: Identifiable {
+    var id: Double { lat + long } // fix this
+}
+
+extension Location: Equatable { }

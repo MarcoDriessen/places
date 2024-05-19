@@ -11,7 +11,9 @@ import SwiftUI
 struct PlacesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let networkService = DefaultNetworkService()
+            let viewModel = LocationsListViewModel(networkService: networkService)
+            LocationsListView(viewModel: viewModel)
         }
     }
 }
