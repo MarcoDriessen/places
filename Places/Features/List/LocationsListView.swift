@@ -30,13 +30,13 @@ struct LocationsListView: View {
         case .loading:
             ProgressView("Loading...")
         case .success(let locations):
-            List {
-                ForEach(locations) { location in
-                    Text(location.name ?? "")
+            List(locations, id: \.id) { location in
+                Button(location.name ?? "") {
+                    viewModel.didTap(location: location)
                 }
             }
         case .error(let error):
-            Text(error.localizedDescription)
+            Text(error?.localizedDescription ?? "") // fix domain error
         }
     }
 }

@@ -9,5 +9,8 @@ import Foundation
 
 protocol URLComposable {
     var url: URL? { get }
-    func addQueryItem(name: String, value: String) -> Self
+    func setScheme(_ scheme: String) -> Self
+    func setHost(_ host: String) -> Self
+    func setPath(_ path: String) -> Self
+    func addQueryItem(name: String, value: String?) -> Self
 }

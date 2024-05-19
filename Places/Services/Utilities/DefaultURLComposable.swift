@@ -11,16 +11,26 @@ final class DefaultURLComposable: URLComposable {
 
     private var components: URLComponents
     
-    init(scheme: String,
-         host: String,
-         path: String) {
-        components = URLComponents()
-        components.scheme = scheme
-        components.host = host
-        components.path = path
+    init() {
+        self.components = URLComponents()
     }
-    
-    func addQueryItem(name: String, value: String) -> Self {
+
+    func setScheme(_ scheme: String) -> Self {
+        components.scheme = scheme
+        return self
+    }
+
+    func setHost(_ host: String) -> Self {
+        components.host = host
+        return self
+    }
+
+    func setPath(_ path: String) -> Self {
+        components.path = path
+        return self
+    }
+
+    func addQueryItem(name: String, value: String?) -> Self {
         var queryItems = components.queryItems ?? []
         let queryItem = URLQueryItem(name: name, value: value)
         queryItems.append(queryItem)
@@ -29,6 +39,6 @@ final class DefaultURLComposable: URLComposable {
     }
 
     var url: URL? {
-        components.url
+        return components.url
     }
 }

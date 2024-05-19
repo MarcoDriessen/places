@@ -12,7 +12,10 @@ struct PlacesApp: App {
     var body: some Scene {
         WindowGroup {
             let networkService = DefaultNetworkService()
-            let viewModel = LocationsListViewModel(networkService: networkService)
+            let urlComposable = DefaultURLComposable()
+            let viewModel = LocationsListViewModel(
+                networkService: networkService,
+                urlComposable: urlComposable)
             LocationsListView(viewModel: viewModel)
         }
     }

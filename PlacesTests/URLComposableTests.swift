@@ -11,19 +11,28 @@ import XCTest
 class URLComposableTests: XCTestCase {
 
     func test_without_queryItems() {
-        // Given - When
-        let urlComposable = DefaultURLComposable(scheme: "wikipedia", host: "places", path: "")
-        
+        // Given
+        let urlComposable = DefaultURLComposable()
+            .setScheme("wikipedia")
+            .setHost("places")
+            .setPath("")
+
         // Then
         XCTAssertEqual(urlComposable.url?.absoluteString, "wikipedia://places")
     }
     
     func test_with_queryItems() {
         // Given
-        let wikipediaSearchUrlComposable = DefaultURLComposable(scheme: "https", host: "en.wikipedia.org", path: "/Amsterdam")
-        let wikipediaUrlString = wikipediaSearchUrlComposable.url!.absoluteString
-        var urlComposable = DefaultURLComposable(scheme: "wikipedia", host: "places", path: "")
+        let wikipediaSearchUrlComposable = DefaultURLComposable()
+            .setScheme("https")
+            .setHost("en.wikipedia.org")
+            .setPath("/Amsterdam")
         
+        var urlComposable = DefaultURLComposable()
+            .setScheme("wikipedia")
+            .setHost("places")
+            .setPath("")
+
         // When
         urlComposable = urlComposable
             .addQueryItem(name: "WMFArticleURL", value: wikipediaSearchUrlComposable.url!.absoluteString)
@@ -37,10 +46,16 @@ class URLComposableTests: XCTestCase {
     
     func test_with_multiple_queryItems() {
         // Given
-        let wikipediaSearchUrlComposable = DefaultURLComposable(scheme: "https", host: "en.wikipedia.org", path: "/Amsterdam")
-        let wikipediaUrlString = wikipediaSearchUrlComposable.url!.absoluteString
-        var urlComposable = DefaultURLComposable(scheme: "wikipedia", host: "places", path: "")
+        let wikipediaSearchUrlComposable = DefaultURLComposable()
+            .setScheme("https")
+            .setHost("en.wikipedia.org")
+            .setPath("/Amsterdam")
         
+        var urlComposable = DefaultURLComposable()
+            .setScheme("wikipedia")
+            .setHost("places")
+            .setPath("")
+
         // When
         urlComposable = urlComposable
             .addQueryItem(name: "WMFArticleURL", value: wikipediaSearchUrlComposable.url!.absoluteString)
@@ -53,3 +68,4 @@ class URLComposableTests: XCTestCase {
         )
     }
 }
+
