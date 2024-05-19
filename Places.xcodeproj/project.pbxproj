@@ -21,6 +21,7 @@
 		7739D2FA2BFA0E0D00D7A054 /* URLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */; };
 		7739D2FD2BFA0F8C00D7A054 /* URLComposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2FC2BFA0F8C00D7A054 /* URLComposableTests.swift */; };
 		7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */; };
+		7739D3052BFA200F00D7A054 /* URLOpenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3042BFA200F00D7A054 /* URLOpenable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComposable.swift; sourceTree = "<group>"; };
 		7739D2FC2BFA0F8C00D7A054 /* URLComposableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComposableTests.swift; sourceTree = "<group>"; };
 		7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultURLComposable.swift; sourceTree = "<group>"; };
+		7739D3042BFA200F00D7A054 /* URLOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpenable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,8 +168,8 @@
 		7739D2F82BFA0DFA00D7A054 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */,
-				7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */,
+				7739D3032BFA1FFD00D7A054 /* URLOpenable */,
+				7739D3022BFA1FEF00D7A054 /* URLComposable */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -178,6 +180,23 @@
 				7739D2EA2BF8EEEA00D7A054 /* MockURLProtocol.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		7739D3022BFA1FEF00D7A054 /* URLComposable */ = {
+			isa = PBXGroup;
+			children = (
+				7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */,
+				7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */,
+			);
+			path = URLComposable;
+			sourceTree = "<group>";
+		};
+		7739D3032BFA1FFD00D7A054 /* URLOpenable */ = {
+			isa = PBXGroup;
+			children = (
+				7739D3042BFA200F00D7A054 /* URLOpenable.swift */,
+			);
+			path = URLOpenable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +306,7 @@
 				7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */,
 				7739D2D72BF8E59A00D7A054 /* DefaultNetworkService.swift in Sources */,
 				7739D2F12BF9030600D7A054 /* LocationsListViewModel.swift in Sources */,
+				7739D3052BFA200F00D7A054 /* URLOpenable.swift in Sources */,
 				7739D2FA2BFA0E0D00D7A054 /* URLComposable.swift in Sources */,
 				7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */,
 			);

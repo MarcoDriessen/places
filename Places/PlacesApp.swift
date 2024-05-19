@@ -13,9 +13,11 @@ struct PlacesApp: App {
         WindowGroup {
             let networkService = DefaultNetworkService()
             let urlComposable = DefaultURLComposable()
+            let urlOpenable = UIApplication.shared
             let viewModel = LocationsListViewModel(
                 networkService: networkService,
-                urlComposable: urlComposable)
+                urlComposable: urlComposable, 
+                urlOpenable: urlOpenable)
             LocationsListView(viewModel: viewModel)
         }
     }

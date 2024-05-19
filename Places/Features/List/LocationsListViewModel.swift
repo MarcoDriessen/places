@@ -21,11 +21,14 @@ final class LocationsListViewModel: ObservableObject {
     
     private let networkService: NetworkService
     private let urlComposable: URLComposable
+    private let urlOpenable: URLOpenable
     
     init(networkService: NetworkService,
-         urlComposable: URLComposable) {
+         urlComposable: URLComposable,
+         urlOpenable: URLOpenable) {
         self.networkService = networkService
         self.urlComposable = urlComposable
+        self.urlOpenable = urlOpenable
     }
     
     func fetchLocations() async {
@@ -64,6 +67,11 @@ final class LocationsListViewModel: ObservableObject {
         deeplinkUrl = deeplinkUrl
             .addQueryItem(name: "WMFArticleURL", value: searchUrlString)
         
-        UIApplication.shared.open(deeplinkUrl.url!)
+        guard let deeplinkUrl = deeplinkUrl.url else {
+            viewState = .error()
+            return
+        }
+        
+        urlOpenable.open(deeplinkUrl, options: [:], completionHandler: nil)
     }
 }
