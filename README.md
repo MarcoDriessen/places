@@ -20,9 +20,9 @@ iOS technical assignment Marco Driessen.
 ## Prerequisites
 - Xcode 15 or higher
 - iOS 17 of higher
-
 ## Instructions for reviewer
 - Clone the Wikipedia app from GitHub (https://github.com/wikimedia/wikipedia-ios).
+- Add the `patch.diff` to the root of the Wikipedia folder.
 - Apply git patch `patch.diff` to see changes made in the Wikipedia app: `git apply patch.diff`.
 - Build and run the `Places` iOS app.
 
@@ -32,11 +32,11 @@ iOS technical assignment Marco Driessen.
 
 ## Future enhancements
 - UI enhancements.
-- Impement a more robust API Service that handles more than just a URL.
+- Implement a more robust API layer that handles more than just a URL.
 - Implement a separate ViewModel for SearchView for better separation of concerns.
 - Improve initialization and location of initial Views.
 - Proper use of #Preview and Preview Content.
-- Full accessibility support.
+- Full accessibility support (see: https://appt.org/en/guidelines/en-301-549).
 - Concurrency improvements.
 
 

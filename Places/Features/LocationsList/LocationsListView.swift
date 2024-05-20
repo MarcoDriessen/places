@@ -72,7 +72,8 @@ struct LocationsListView: View {
     }
   }
   
-  @ViewBuilder private func errorView(error: LocationsListViewModel.LocationsListError) -> some View {
+  @ViewBuilder 
+  private func errorView(error: LocationsListViewModel.LocationsListError) -> some View {
     switch error {
     case .fetchError:
       VStack(spacing: 16, content: {
@@ -97,7 +98,8 @@ struct LocationsListView: View {
     }
   }
   
-  @ViewBuilder private var bottomSheetSearchView: some View {
+  @ViewBuilder 
+  private var bottomSheetSearchView: some View {
     VStack {
       switch viewModel.bottomSheetState {
       case .idle:
