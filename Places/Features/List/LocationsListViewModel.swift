@@ -14,13 +14,13 @@ final class LocationsListViewModel {
   enum ViewState {
     case loading
     case success([LocationViewEntity])
-    case error(Error? = nil) // use domain error
+    case error(LocationsListError? = nil)
   }
   
   enum BottomSheetState {
     case idle
     case loading
-    case error(Error? = nil)
+    case error(LocationsListError? = nil)
   }
   
   private(set) var viewState: ViewState = .loading
@@ -57,13 +57,12 @@ final class LocationsListViewModel {
         .map { $0.toLocationViewEntity() }
       viewState = .success(locations)
     } catch {
-      viewState = .error(error)
+      viewState = .error(.fetchError)
     }
   }
   
   func didTap(location: LocationViewEntity) {
     guard let name = location.name else {
-      viewState = .error()
       return
     }
     
@@ -78,7 +77,7 @@ final class LocationsListViewModel {
       .setPath("")
     
     guard let searchUrlString = searchUrl.url?.absoluteString else {
-      viewState = .error()
+      viewState = .error(.urlError)
       return
     }
     
@@ -86,7 +85,7 @@ final class LocationsListViewModel {
       .addQueryItem(name: "WMFArticleURL", value: searchUrlString)
     
     guard let deeplinkUrl = deeplinkUrl.url else {
-      viewState = .error()
+      viewState = .error(.urlError)
       return
     }
     
@@ -100,7 +99,7 @@ final class LocationsListViewModel {
     let formattedLongitude = longitude.replacingOccurrences(of: ",", with: ".")
     
     guard let latitude = Double(formattedLatitude), let longitude = Double(formattedLongitude) else {
-      bottomSheetState = .error()
+      bottomSheetState = .error(.geocodeError)
       return
     }
     
@@ -117,7 +116,7 @@ final class LocationsListViewModel {
       bottomSheetState = .idle
       showBottomSheet = false
     } catch {
-      bottomSheetState = .error(error)
+      bottomSheetState = .error(.geocodeError)
     }
   }
   

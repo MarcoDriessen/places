@@ -9,11 +9,7 @@ import Foundation
 import CoreLocation
 
 struct DefaultReverseGeocodable: ReverseGeocodable {
-  
-  enum ReverseGeocodableError: Error {
-    case unknownLocation
-  }
-  
+    
   private let geocoder: CLGeocoder
   
   init(geocoder: CLGeocoder = CLGeocoder()) {

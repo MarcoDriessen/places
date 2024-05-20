@@ -18,7 +18,7 @@ class MockReverseGeocodable: ReverseGeocodable {
         }
         
         guard let name = mockName else {
-            throw NetworkError.noData
+            throw NetworkServiceError.invalidResponse
         }
         
         return name

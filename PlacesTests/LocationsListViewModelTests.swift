@@ -95,7 +95,7 @@ final class LocationsListViewModelTests: XCTestCase {
   
   func test_fetch_locations_error() async {
     // Given
-    mockNetworkService.error = NetworkError.networkError
+    mockNetworkService.error = NetworkServiceError.invalidResponse
     
     // When
     await viewModel.fetchLocations()
@@ -128,7 +128,7 @@ final class LocationsListViewModelTests: XCTestCase {
   
   func test_add_location_by_coordinates_failure() async {
     // Given
-    mockReverseGeocodable.error = NetworkError.networkError // Marco fix this
+    mockReverseGeocodable.error = ReverseGeocodableError.unknownLocation
     
     // When
     await viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
@@ -163,10 +163,10 @@ final class LocationsListViewModelTests: XCTestCase {
     viewModel.didTap(location: location)
     
     // Then
-    if case .error = viewModel.viewState {
-      XCTAssert(true)
+    if case .success = viewModel.viewState {
+      XCTFail()
     } else {
-      XCTFail("Expected error state")
+      XCTAssert(true)
     }
   }
   

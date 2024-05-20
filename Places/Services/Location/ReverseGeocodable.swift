@@ -8,6 +8,10 @@
 import Foundation
 import CoreLocation
 
+enum ReverseGeocodableError: Error {
+  case unknownLocation
+}
+
 protocol ReverseGeocodable {
   func reverseGeocode(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> String
 }

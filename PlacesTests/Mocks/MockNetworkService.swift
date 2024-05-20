@@ -21,7 +21,7 @@ class MockNetworkService: NetworkService {
         }
         
         guard let data = mockData else {
-            throw NetworkError.noData
+            throw NetworkServiceError.invalidResponse
         }
         
         return try decoder.decode(T.self, from: data)

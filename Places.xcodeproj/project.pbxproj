@@ -32,6 +32,7 @@
 		7739D31D2BFB2D6700D7A054 /* MockURLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */; };
 		7739D31F2BFB353D00D7A054 /* LocationViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */; };
 		7739D3212BFB356300D7A054 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3202BFB356300D7A054 /* Constants.swift */; };
+		7739D3232BFB37CE00D7A054 /* LocationsListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3222BFB37CE00D7A054 /* LocationsListError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLComposable.swift; sourceTree = "<group>"; };
 		7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewEntity.swift; sourceTree = "<group>"; };
 		7739D3202BFB356300D7A054 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7739D3222BFB37CE00D7A054 /* LocationsListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,10 +184,11 @@
 		7739D2EF2BF9027300D7A054 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				7739D3202BFB356300D7A054 /* Constants.swift */,
 				7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */,
 				7739D2F02BF9030600D7A054 /* LocationsListViewModel.swift */,
 				7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */,
+				7739D3222BFB37CE00D7A054 /* LocationsListError.swift */,
+				7739D3202BFB356300D7A054 /* Constants.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				7739D2D52BF8E32000D7A054 /* NetworkService.swift in Sources */,
 				7739D2DC2BF8E9A600D7A054 /* Location.swift in Sources */,
 				7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */,
+				7739D3232BFB37CE00D7A054 /* LocationsListError.swift in Sources */,
 				7739D3212BFB356300D7A054 /* Constants.swift in Sources */,
 				7739D2D72BF8E59A00D7A054 /* DefaultNetworkService.swift in Sources */,
 				7739D2F12BF9030600D7A054 /* LocationsListViewModel.swift in Sources */,

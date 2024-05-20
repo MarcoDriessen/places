@@ -7,11 +7,9 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case invalidURL
-    case noData
+enum NetworkServiceError: Error {
     case decodingError
-    case networkError
+    case invalidResponse
 }
 
 protocol NetworkService {

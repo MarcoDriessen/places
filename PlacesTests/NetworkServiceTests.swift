@@ -83,7 +83,7 @@ final class NetworkServiceTests: XCTestCase {
     do {
       _ = try await sut.fetch(from: url) as Places
     } catch {
-      XCTAssertEqual(error as? NetworkError, NetworkError.networkError)
+      XCTAssertEqual(error as? NetworkServiceError, NetworkServiceError.invalidResponse)
     }
   }
   
@@ -103,7 +103,7 @@ final class NetworkServiceTests: XCTestCase {
     do {
       _ = try await sut.fetch(from: url) as Places
     } catch {
-      XCTAssertEqual(error as? NetworkError, NetworkError.decodingError)
+      XCTAssertEqual(error as? NetworkServiceError, NetworkServiceError.decodingError)
     }
   }
 }
