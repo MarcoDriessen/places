@@ -1,0 +1,33 @@
+diff --git a/Wikipedia/Code/PlacesViewController.swift b/Wikipedia/Code/PlacesViewController.swift
+index 24cd0c40fb..ef6931815b 100644
+--- a/Wikipedia/Code/PlacesViewController.swift
++++ b/Wikipedia/Code/PlacesViewController.swift
+@@ -1939,7 +1939,28 @@ class PlacesViewController: ViewController, UISearchBarDelegate, ArticlePopoverV
+         recenterOnUserLocation(self)
+     }
+     
++    private func queryParameterValue(in url: String, for key: String) -> String? {
++        guard let components = URLComponents(string: url) else {
++            return nil
++        }
++        return components.queryItems?.first(where: { $0.name == key })?.value
++    }
++
++    private func location(in articleURL: URL) -> CLLocation? {
++        if let latitude = queryParameterValue(in: articleURL.absoluteString, for: "latitude"),
++           let longitude = queryParameterValue(in: articleURL.absoluteString, for: "longitude"),
++           let latitude = CLLocationDegrees(latitude),
++           let longitude = CLLocationDegrees(longitude) {
++               return CLLocation(latitude: latitude, longitude: longitude)
++        }
++        return nil
++    }
++
+     @objc public func showArticleURL(_ articleURL: URL) {
++        if let location = location(in: articleURL) {
++          zoomAndPanMapView(toLocation: location)
++          return
++        }
+         guard let article = dataStore.fetchArticle(with: articleURL), let title = articleURL.wmf_title,
+             view != nil else { // force view instantiation
+             return

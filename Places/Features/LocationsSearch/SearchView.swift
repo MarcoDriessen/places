@@ -27,8 +27,7 @@ struct SearchView: View {
       Text("search_title")
         .font(.headline)
         .accessibilityAddTraits(.isHeader)
-      
-      // Marco
+
       Picker("", selection: $selectedIndex) {
         Text("search_segmented_name").tag(SelectedIndex.name)
         Text("search_segmented_coordinates").tag(SelectedIndex.coordinates)
@@ -81,7 +80,3 @@ struct SearchView: View {
     }
   }
 }
-
-//#Preview {
-//  SearchView { _ in } didSetCoordinates: { _ in }
-//}
