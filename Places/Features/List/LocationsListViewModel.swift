@@ -45,8 +45,12 @@ final class LocationsListViewModel {
   }
   
   func fetchLocations() async {
+    
+    guard let url = URL(string: Constants.locationsURLString) else {
+      return
+    }
+    
     do {
-      let url = URL(string: "https://raw.githubusercontent.com/abnamrocoesd/assignment-ios/main/locations.json")!
       let places: Places = try await networkService.fetch(from: url)
       locations = places.locations
         .filter { $0.name != nil }
@@ -130,23 +134,5 @@ final class LocationsListViewModel {
   
   func didTapErrorConfirm() {
     bottomSheetState = .idle
-  }
-}
-
-extension LocationsListViewModel {
-  struct LocationViewEntity: Equatable, Identifiable {
-    var id = UUID()
-    let name: String?
-    let latitude: Double?
-    let longitude: Double?
-  }
-}
-
-extension Location {
-  fileprivate func toLocationViewEntity() -> LocationsListViewModel.LocationViewEntity {
-    LocationsListViewModel.LocationViewEntity(
-      name: name,
-      latitude: lat,
-      longitude: long)
   }
 }

@@ -30,6 +30,8 @@
 		7739D3192BFB2CFE00D7A054 /* MockReverseGeocoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */; };
 		7739D31B2BFB2D2900D7A054 /* LocationsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */; };
 		7739D31D2BFB2D6700D7A054 /* MockURLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */; };
+		7739D31F2BFB353D00D7A054 /* LocationViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */; };
+		7739D3212BFB356300D7A054 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3202BFB356300D7A054 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReverseGeocoable.swift; sourceTree = "<group>"; };
 		7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListViewModelTests.swift; sourceTree = "<group>"; };
 		7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLComposable.swift; sourceTree = "<group>"; };
+		7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewEntity.swift; sourceTree = "<group>"; };
+		7739D3202BFB356300D7A054 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +182,10 @@
 		7739D2EF2BF9027300D7A054 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				7739D3202BFB356300D7A054 /* Constants.swift */,
 				7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */,
 				7739D2F02BF9030600D7A054 /* LocationsListViewModel.swift */,
+				7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 				7739D2D52BF8E32000D7A054 /* NetworkService.swift in Sources */,
 				7739D2DC2BF8E9A600D7A054 /* Location.swift in Sources */,
 				7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */,
+				7739D3212BFB356300D7A054 /* Constants.swift in Sources */,
 				7739D2D72BF8E59A00D7A054 /* DefaultNetworkService.swift in Sources */,
 				7739D2F12BF9030600D7A054 /* LocationsListViewModel.swift in Sources */,
 				7739D3052BFA200F00D7A054 /* URLOpenable.swift in Sources */,
@@ -351,6 +358,7 @@
 				7739D2FA2BFA0E0D00D7A054 /* URLComposable.swift in Sources */,
 				7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */,
 				7739D3112BFA31F000D7A054 /* ReverseGeocodable.swift in Sources */,
+				7739D31F2BFB353D00D7A054 /* LocationViewEntity.swift in Sources */,
 				7739D30C2BFA252500D7A054 /* SearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
