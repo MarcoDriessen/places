@@ -11,7 +11,7 @@ import SwiftUI
 struct LocationsListView: View {
   
   @State private var viewModel: LocationsListViewModel
-    
+  
   init(viewModel: LocationsListViewModel) {
     _viewModel = State(wrappedValue: viewModel)
   }
@@ -24,7 +24,7 @@ struct LocationsListView: View {
           Button {
             viewModel.showBottomSheet = true
           } label: {
-           Image(systemName: "plus")
+            Image(systemName: "plus")
           }
         }
         .task {

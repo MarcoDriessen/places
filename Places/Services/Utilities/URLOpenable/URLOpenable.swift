@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol URLOpenable {
-    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any], completionHandler completion: ((Bool) -> Void)?)
+  func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any], completionHandler completion: ((Bool) -> Void)?)
 }
 
 extension UIApplication: URLOpenable {}

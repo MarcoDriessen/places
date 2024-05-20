@@ -23,9 +23,10 @@ struct SearchView: View {
   @State private var longitude: String = ""
   
   var body: some View {
-    VStack {
+    VStack(spacing: 16) {
       Text("search_title")
-
+        .font(.headline)
+      
       // Marco
       Picker("", selection: $selectedIndex) {
         Text("search_segmented_name").tag(SelectedIndex.name)
@@ -45,7 +46,7 @@ struct SearchView: View {
   private var searchByNameView: some View {
     TextField("search_name", text: $locationName)
       .textFieldStyle(.roundedBorder)
-
+    
     Spacer()
     
     Button("search_button_add") {
@@ -65,7 +66,7 @@ struct SearchView: View {
       TextField("search_longitude", text: $longitude)
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
-
+      
       Spacer()
       
       Button("search_button_title") {
@@ -77,6 +78,6 @@ struct SearchView: View {
   }
 }
 
-#Preview {
-  SearchView { _ in } didSetCoordinates: { _ in }
-}
+//#Preview {
+//  SearchView { _ in } didSetCoordinates: { _ in }
+//}

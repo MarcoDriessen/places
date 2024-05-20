@@ -10,7 +10,7 @@ import Foundation
 struct LocationsListURL {
   
   static func searchURL(with latitude: String, longitude: String) -> URL? {
-  
+    
     var components = URLComponents()
     
     components.scheme = "https"
@@ -27,12 +27,12 @@ struct LocationsListURL {
   }
   
   static func deeplinkURL(with searchString: String) -> URL? {
-  
+    
     var components = URLComponents()
     
     components.scheme = "wikipedia"
     components.host = "places"
-  
+    
     components.queryItems = [URLQueryItem(name: "WMFArticleURL", value: searchString)]
     
     return components.url

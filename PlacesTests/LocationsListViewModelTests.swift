@@ -159,7 +159,7 @@ final class LocationsListViewModelTests: XCTestCase {
   
   func test_did_tap_location_error() {
     // Given
-    let location = LocationsListViewModel.LocationViewEntity(name: nil, 
+    let location = LocationsListViewModel.LocationViewEntity(name: nil,
                                                              latitude: "52.3676",
                                                              longitude: "4.9041")
     

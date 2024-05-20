@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 struct DefaultReverseGeocodable: ReverseGeocodable {
-
+  
   private let geocoder: CLGeocoder
   
   init(geocoder: CLGeocoder = CLGeocoder()) {

@@ -9,11 +9,11 @@ import UIKit
 @testable import Places
 
 class MockURLOpenable: URLOpenable {
-    var openedURL: URL?
-    
-    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any] = [:], completionHandler completion: ((Bool) -> Void)? = nil) {
-        openedURL = url
-        completion?(true)
-    }
+  var openedURL: URL?
+  
+  func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey : Any] = [:], completionHandler completion: ((Bool) -> Void)? = nil) {
+    openedURL = url
+    completion?(true)
+  }
 }
 

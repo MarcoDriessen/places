@@ -43,7 +43,6 @@ final class LocationsListViewModel {
   }
   
   func fetchLocations() async {
-    
     guard let url = URL(string: Constants.locationsURLString) else {
       return
     }
@@ -105,12 +104,7 @@ final class LocationsListViewModel {
     
     do {
       let coordinate = try await reverseGeocodable.getCoordinates(name: name)
-      let latitude = coordinate.latitude
-      let longitude = coordinate.longitude
-      let location = LocationViewEntity(name: name,
-                                        latitude: String(latitude),
-                                        longitude: String(longitude))
-      addLocation(name: name, latitude: latitude, longitude: longitude)
+      addLocation(name: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
     } catch {
       bottomSheetState = .error(.geocodeError)
     }

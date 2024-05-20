@@ -9,21 +9,21 @@ import Foundation
 @testable import Places
 
 class MockNetworkService: NetworkService {
-    var decoder = JSONDecoder()
-    var urlSession = URLSession.shared
-    
-    var mockData: Data?
-    var error: Error?
-
-    func fetch<T: Decodable>(from url: URL) async throws -> T {
-        if let error = error {
-            throw error
-        }
-        
-        guard let data = mockData else {
-            throw NetworkServiceError.invalidResponse
-        }
-        
-        return try decoder.decode(T.self, from: data)
+  var decoder = JSONDecoder()
+  var urlSession = URLSession.shared
+  
+  var mockData: Data?
+  var error: Error?
+  
+  func fetch<T: Decodable>(from url: URL) async throws -> T {
+    if let error = error {
+      throw error
     }
+    
+    guard let data = mockData else {
+      throw NetworkServiceError.invalidResponse
+    }
+    
+    return try decoder.decode(T.self, from: data)
+  }
 }
