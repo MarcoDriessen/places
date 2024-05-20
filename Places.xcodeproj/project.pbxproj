@@ -25,6 +25,11 @@
 		7739D30C2BFA252500D7A054 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D30B2BFA252500D7A054 /* SearchView.swift */; };
 		7739D3112BFA31F000D7A054 /* ReverseGeocodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3102BFA31F000D7A054 /* ReverseGeocodable.swift */; };
 		7739D3132BFA323C00D7A054 /* DefaultReverseGeocodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3122BFA323C00D7A054 /* DefaultReverseGeocodable.swift */; };
+		7739D3152BFB2C6C00D7A054 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3142BFB2C6C00D7A054 /* MockNetworkService.swift */; };
+		7739D3172BFB2CDE00D7A054 /* MockURLOpenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3162BFB2CDE00D7A054 /* MockURLOpenable.swift */; };
+		7739D3192BFB2CFE00D7A054 /* MockReverseGeocoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */; };
+		7739D31B2BFB2D2900D7A054 /* LocationsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */; };
+		7739D31D2BFB2D6700D7A054 /* MockURLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,11 @@
 		7739D30B2BFA252500D7A054 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		7739D3102BFA31F000D7A054 /* ReverseGeocodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodable.swift; sourceTree = "<group>"; };
 		7739D3122BFA323C00D7A054 /* DefaultReverseGeocodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultReverseGeocodable.swift; sourceTree = "<group>"; };
+		7739D3142BFB2C6C00D7A054 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		7739D3162BFB2CDE00D7A054 /* MockURLOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLOpenable.swift; sourceTree = "<group>"; };
+		7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReverseGeocoable.swift; sourceTree = "<group>"; };
+		7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListViewModelTests.swift; sourceTree = "<group>"; };
+		7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLComposable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +161,7 @@
 				7739D2FB2BFA0F7900D7A054 /* Mocks */,
 				7739D2E32BF8EAB100D7A054 /* NetworkServiceTests.swift */,
 				7739D2FC2BFA0F8C00D7A054 /* URLComposableTests.swift */,
+				7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */,
 			);
 			path = PlacesTests;
 			sourceTree = "<group>";
@@ -186,6 +197,10 @@
 			isa = PBXGroup;
 			children = (
 				7739D2EA2BF8EEEA00D7A054 /* MockURLProtocol.swift */,
+				7739D3142BFB2C6C00D7A054 /* MockNetworkService.swift */,
+				7739D3162BFB2CDE00D7A054 /* MockURLOpenable.swift */,
+				7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */,
+				7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -344,9 +359,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7739D3152BFB2C6C00D7A054 /* MockNetworkService.swift in Sources */,
 				7739D2E42BF8EAB100D7A054 /* NetworkServiceTests.swift in Sources */,
 				7739D2EB2BF8EEEA00D7A054 /* MockURLProtocol.swift in Sources */,
 				7739D2FD2BFA0F8C00D7A054 /* URLComposableTests.swift in Sources */,
+				7739D31D2BFB2D6700D7A054 /* MockURLComposable.swift in Sources */,
+				7739D31B2BFB2D2900D7A054 /* LocationsListViewModelTests.swift in Sources */,
+				7739D3192BFB2CFE00D7A054 /* MockReverseGeocoable.swift in Sources */,
+				7739D3172BFB2CDE00D7A054 /* MockURLOpenable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
