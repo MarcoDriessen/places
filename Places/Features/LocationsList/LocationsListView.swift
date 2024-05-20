@@ -25,6 +25,7 @@ struct LocationsListView: View {
             viewModel.showBottomSheet = true
           } label: {
             Image(systemName: "plus")
+              .accessibilityLabel(Text("add_location"))
           }
         }
         .task {
@@ -61,6 +62,9 @@ struct LocationsListView: View {
             .font(.caption)
           }
         })
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(location.name ?? "")
+        .accessibilityAddTraits(.isButton)
       }
     }
     .sheet(isPresented: $viewModel.showBottomSheet) {
@@ -121,17 +125,3 @@ struct LocationsListView: View {
     .presentationDetents([.medium])
   }
 }
-
-//#Preview {
-//  let networkService = DefaultNetworkService()
-//  let urlComposable = DefaultURLComposable()
-//  let urlOpenable = UIApplication.shared
-//  let reverseGeocodable = DefaultReverseGeocodable()
-//  
-//  let viewModel = LocationsListViewModel(
-//    networkService: networkService,
-//    urlComposable: urlComposable,
-//    urlOpenable: urlOpenable,
-//    reverseGeocodable: reverseGeocodable)
-//  return LocationsListView(viewModel: viewModel)
-//}

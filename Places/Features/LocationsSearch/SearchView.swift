@@ -26,6 +26,7 @@ struct SearchView: View {
     VStack(spacing: 16) {
       Text("search_title")
         .font(.headline)
+        .accessibilityAddTraits(.isHeader)
       
       // Marco
       Picker("", selection: $selectedIndex) {
@@ -46,6 +47,7 @@ struct SearchView: View {
   private var searchByNameView: some View {
     TextField("search_name", text: $locationName)
       .textFieldStyle(.roundedBorder)
+      .accessibility(label: Text("textfield"))
     
     Spacer()
     
@@ -63,9 +65,11 @@ struct SearchView: View {
       TextField("search_latitude", text: $latitude)
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
+        .accessibility(label: Text("textfield"))
       TextField("search_longitude", text: $longitude)
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
+        .accessibility(label: Text("textfield"))
       
       Spacer()
       

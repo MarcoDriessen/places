@@ -4,6 +4,22 @@
     "" : {
 
     },
+    "add_location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Location"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Locatie toevoegen"
+          }
+        }
+      }
+    },
     "location_confirm_button_title" : {
       "localizations" : {
         "en" : {
@@ -256,6 +272,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek Locatie"
+          }
+        }
+      }
+    },
+    "textfield" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textfield"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tekst veld"
           }
         }
       }
