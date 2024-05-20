@@ -24,11 +24,11 @@ struct SearchView: View {
   
   var body: some View {
     VStack {
-      Text("Add Location")
+      Text("search_title")
 
       Picker("", selection: $selectedIndex) {
-        Text("Name").tag(SelectedIndex.name)
-        Text("Coordinates").tag(SelectedIndex.coordinates)
+        Text("search_segmented_name").tag(SelectedIndex.name)
+        Text("search_segmented_coordinates").tag(SelectedIndex.coordinates)
       }
       .pickerStyle(.segmented)
       
@@ -42,12 +42,12 @@ struct SearchView: View {
   
   @ViewBuilder
   private var searchByNameView: some View {
-    TextField("Location", text: $locationName)
+    TextField("search_name", text: $locationName)
       .textFieldStyle(.roundedBorder)
 
     Spacer()
     
-    Button("Add") {
+    Button("search_button_add") {
       didSetLocationName(locationName)
       locationName = ""
     }
@@ -57,16 +57,16 @@ struct SearchView: View {
   @ViewBuilder
   private var searchByCoordinatesView: some View {
     VStack {
-      TextField("Latitude", text: $latitude)
+      TextField("search_latitude", text: $latitude)
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
-      TextField("Longitude", text: $longitude)
+      TextField("search_longitude", text: $longitude)
         .textFieldStyle(.roundedBorder)
         .keyboardType(.decimalPad)
 
       Spacer()
       
-      Button("Search") {
+      Button("search_button_title") {
         didSetCoordinates((latitude: latitude, longitude: longitude))
       }
       .buttonStyle(.borderedProminent)

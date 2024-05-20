@@ -19,7 +19,7 @@ struct LocationsListView: View {
   var body: some View {
     NavigationView {
       content
-        .navigationTitle("Locations")
+        .navigationTitle("location_list_title")
         .toolbar {
           Button {
             viewModel.showBottomSheet = true
@@ -37,7 +37,7 @@ struct LocationsListView: View {
   private var content: some View {
     switch viewModel.viewState {
     case .loading:
-      ProgressView("Loading...")
+      ProgressView("location_list_loading")
     case .success(let locations):
       VStack {
         List(locations, id: \.id) { location in
@@ -58,11 +58,11 @@ struct LocationsListView: View {
               }
             })
           case .loading:
-            ProgressView("Searching Location...")
+            ProgressView("location_list_loading")
           case .error:
             VStack {
-              Text("ERROR")
-              Button("Got it") {
+//              Text("ERROR")
+              Button("location_confirm_button_title") {
                 viewModel.didTapErrorConfirm()
               }
               .buttonStyle(.borderedProminent)
