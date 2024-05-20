@@ -127,6 +127,10 @@ final class LocationsListViewModel {
     bottomSheetState = .idle
     showBottomSheet = false
   }
+  
+  func didTapErrorConfirm() {
+    bottomSheetState = .idle
+  }
 }
 
 extension LocationsListViewModel {

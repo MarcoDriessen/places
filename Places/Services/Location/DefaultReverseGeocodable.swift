@@ -14,7 +14,11 @@ struct DefaultReverseGeocodable: ReverseGeocodable {
     case unknownLocation
   }
   
-  private let geocoder = CLGeocoder()
+  private let geocoder: CLGeocoder
+  
+  init(geocoder: CLGeocoder = CLGeocoder()) {
+    self.geocoder = geocoder
+  }
   
   func reverseGeocode(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> String {
     let location = CLLocation(latitude: latitude, longitude: longitude)

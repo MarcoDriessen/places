@@ -60,7 +60,13 @@ struct LocationsListView: View {
           case .loading:
             ProgressView("Searching Location...")
           case .error:
-            Text("ERROR")
+            VStack {
+              Text("ERROR")
+              Button("Got it") {
+                viewModel.didTapErrorConfirm()
+              }
+              .buttonStyle(.borderedProminent)
+            }
           }
         }
         .presentationDetents([.medium])
