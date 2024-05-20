@@ -12,7 +12,7 @@ class MockReverseGeocodable: ReverseGeocodable {
     var mockName: String?
     var error: Error?
 
-    func reverseGeocode(latitude: Double, longitude: Double) async throws -> String {
+    func getLocationName(latitude: Double, longitude: Double) async throws -> String {
         if let error = error {
             throw error
         }

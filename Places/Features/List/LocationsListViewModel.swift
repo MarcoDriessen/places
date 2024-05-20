@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 @Observable
 final class LocationsListViewModel {
@@ -69,11 +70,11 @@ final class LocationsListViewModel {
       return
     }
     
-    let searchUrl = searchURLComposable
+    var searchUrl = searchURLComposable
       .setScheme("https")
       .setHost("en.wikipedia.org")
 
-    searchUrl
+    searchUrl = searchUrl
       .addQueryItem(name: "latitude", value: String(latitude))
       .addQueryItem(name: "longitude", value: String(longitude))
     
@@ -110,8 +111,9 @@ final class LocationsListViewModel {
     }
     
     do {
-      let name = try await reverseGeocodable.reverseGeocode(latitude: latitude,
-                                                            longitude: longitude)
+      let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+      let name = try await reverseGeocodable.getLocationName(coordinate: coordinate)
+      
       guard !locations.contains(where: { $0.name == name }) else {
         bottomSheetState = .idle
         return
@@ -126,7 +128,26 @@ final class LocationsListViewModel {
     }
   }
   
-  func addLocation(name: String) {
+  func addLocation(name: String) async {
+    bottomSheetState = .loading
+    
+    do {
+      let coordinate = try await reverseGeocodable.getCoordinates(name: name)
+      let location = LocationViewEntity(name: name,
+                                        latitude: coordinate.latitude,
+                                        longitude: coordinate.longitude)
+      guard !locations.contains(where: { $0.name == name }) else {
+        bottomSheetState = .idle
+        return
+      }
+      locations.append(location)
+      viewState = .success(locations)
+      bottomSheetState = .idle
+      showBottomSheet = false
+    } catch {
+      bottomSheetState = .error(.geocodeError)
+    }
+    
     guard !locations.contains(where: { $0.name == name }) else {
       return
     }

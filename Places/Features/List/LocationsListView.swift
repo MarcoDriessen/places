@@ -49,6 +49,7 @@ struct LocationsListView: View {
   private func successView(locations: [LocationsListViewModel.LocationViewEntity]) -> some View {
     VStack {
       List(locations, id: \.id) { location in
+        // Marco
         Button(location.name ?? "") {
           viewModel.didTap(location: location)
         }
@@ -89,7 +90,9 @@ struct LocationsListView: View {
       switch viewModel.bottomSheetState {
       case .idle:
         SearchView(didSetLocationName: { locationName in
-          viewModel.addLocation(name: locationName)
+          Task {
+            await viewModel.addLocation(name: locationName)
+          }
         }, didSetCoordinates: { coordinates in
           Task {
             await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)

@@ -9,15 +9,15 @@ import Foundation
 import CoreLocation
 
 struct DefaultReverseGeocodable: ReverseGeocodable {
-    
+
   private let geocoder: CLGeocoder
   
   init(geocoder: CLGeocoder = CLGeocoder()) {
     self.geocoder = geocoder
   }
   
-  func reverseGeocode(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> String {
-    let location = CLLocation(latitude: latitude, longitude: longitude)
+  func getLocationName(coordinate: CLLocationCoordinate2D) async throws -> String {
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     let placemarks = try await geocoder.reverseGeocodeLocation(location)
     
     guard let placemark = placemarks.first, let name = placemark.locality else {
@@ -25,5 +25,15 @@ struct DefaultReverseGeocodable: ReverseGeocodable {
     }
     
     return name
+  }
+  
+  func getCoordinates(name: String) async throws -> CLLocationCoordinate2D {
+    let placemarks = try await geocoder.geocodeAddressString(name)
+    
+    guard let placemark = placemarks.first, let location = placemark.location else {
+      throw ReverseGeocodableError.unknownLocation
+    }
+    
+    return location.coordinate
   }
 }

@@ -13,5 +13,6 @@ enum ReverseGeocodableError: Error {
 }
 
 protocol ReverseGeocodable {
-  func reverseGeocode(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> String
+  func getLocationName(coordinate: CLLocationCoordinate2D) async throws -> String
+  func getCoordinates(name: String) async throws -> CLLocationCoordinate2D
 }
