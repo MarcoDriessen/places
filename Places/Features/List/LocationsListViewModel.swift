@@ -30,16 +30,19 @@ final class LocationsListViewModel {
   private var locations: [LocationViewEntity] = []
   
   private let networkService: NetworkService
-  private let urlComposable: URLComposable
+  private let searchURLComposable: URLComposable
+  private let deeplinkURLComposable: URLComposable
   private let urlOpenable: URLOpenable
   private let reverseGeocodable: ReverseGeocodable
   
   init(networkService: NetworkService,
-       urlComposable: URLComposable,
+       searchURLComposable: URLComposable,
+       deeplinkURLComposable: URLComposable,
        urlOpenable: URLOpenable,
        reverseGeocodable: ReverseGeocodable) {
     self.networkService = networkService
-    self.urlComposable = urlComposable
+    self.searchURLComposable = searchURLComposable
+    self.deeplinkURLComposable = deeplinkURLComposable
     self.urlOpenable = urlOpenable
     self.reverseGeocodable = reverseGeocodable
   }
@@ -62,16 +65,19 @@ final class LocationsListViewModel {
   }
   
   func didTap(location: LocationViewEntity) {
-    guard let name = location.name else {
+    guard let latitude = location.latitude, let longitude = location.longitude else {
       return
     }
     
-    let searchUrl = DefaultURLComposable() // Marco
+    let searchUrl = searchURLComposable
       .setScheme("https")
       .setHost("en.wikipedia.org")
-      .setPath("/\(name)")
+
+    searchUrl
+      .addQueryItem(name: "latitude", value: String(latitude))
+      .addQueryItem(name: "longitude", value: String(longitude))
     
-    var deeplinkUrl = DefaultURLComposable()
+    var deeplinkUrl = deeplinkURLComposable
       .setScheme("wikipedia")
       .setHost("places")
       .setPath("")
@@ -110,7 +116,7 @@ final class LocationsListViewModel {
         bottomSheetState = .idle
         return
       }
-      let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
+      let location = LocationViewEntity(name: name, latitude: latitude, longitude: longitude)
       locations.append(location)
       viewState = .success(locations)
       bottomSheetState = .idle
