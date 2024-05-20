@@ -10,7 +10,11 @@ import Foundation
 extension LocationsListViewModel {
   enum LocationsListError: Error {
     case fetchError
-    case geocodeError
     case urlError
+  }
+  
+  enum GeocodeError: Error {
+    case geocodeError
+    case invalidFormat
   }
 }

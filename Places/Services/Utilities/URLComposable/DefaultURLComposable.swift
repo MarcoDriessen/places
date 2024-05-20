@@ -39,6 +39,6 @@ final class DefaultURLComposable: URLComposable {
     }
 
     var url: URL? {
-        return components.url
+        components.url
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
 
 enum NetworkServiceError: Error {
-    case decodingError
-    case invalidResponse
+  case decodingError
+  case invalidResponse
 }
 
 protocol NetworkService {
-    var decoder: JSONDecoder { get }
-    var urlSession: URLSession { get }
-    func fetch<T: Decodable>(from url : URL) async throws -> T
+  var decoder: JSONDecoder { get }
+  var urlSession: URLSession { get }
+  func fetch<T: Decodable>(from url : URL) async throws -> T
 }

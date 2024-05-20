@@ -14,13 +14,13 @@ final class LocationsListViewModel {
   enum ViewState {
     case loading
     case success([LocationViewEntity])
-    case error(LocationsListError? = nil)
+    case error(LocationsListError)
   }
   
   enum BottomSheetState {
     case idle
     case loading
-    case error(LocationsListError? = nil)
+    case error(GeocodeError)
   }
   
   private(set) var viewState: ViewState = .loading
@@ -54,7 +54,7 @@ final class LocationsListViewModel {
       let places: Places = try await networkService.fetch(from: url)
       locations = places.locations
         .filter { $0.name != nil }
-        .map { $0.toLocationViewEntity() }
+        .map { $0.toLocationViewEntity }
       viewState = .success(locations)
     } catch {
       viewState = .error(.fetchError)
@@ -66,7 +66,7 @@ final class LocationsListViewModel {
       return
     }
     
-    let searchUrl = DefaultURLComposable()
+    let searchUrl = DefaultURLComposable() // Marco
       .setScheme("https")
       .setHost("en.wikipedia.org")
       .setPath("/\(name)")
@@ -99,7 +99,7 @@ final class LocationsListViewModel {
     let formattedLongitude = longitude.replacingOccurrences(of: ",", with: ".")
     
     guard let latitude = Double(formattedLatitude), let longitude = Double(formattedLongitude) else {
-      bottomSheetState = .error(.geocodeError)
+      bottomSheetState = .error(.invalidFormat)
       return
     }
     
@@ -131,7 +131,11 @@ final class LocationsListViewModel {
     showBottomSheet = false
   }
   
-  func didTapErrorConfirm() {
+  func didTapGeocodeErrorConfirm() {
     bottomSheetState = .idle
+  }
+  
+  func didTapUrlErrorConfirm() {
+    viewState = .success(locations)
   }
 }

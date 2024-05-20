@@ -17,7 +17,7 @@ extension LocationsListViewModel {
 }
 
 extension Location {
-  func toLocationViewEntity() -> LocationsListViewModel.LocationViewEntity {
+  var toLocationViewEntity: LocationsListViewModel.LocationViewEntity {
     LocationsListViewModel.LocationViewEntity(
       name: name,
       latitude: lat,

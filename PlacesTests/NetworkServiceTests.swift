@@ -29,6 +29,8 @@ final class NetworkServiceTests: XCTestCase {
   }
   
   func test_fetch_success() async throws {
+    // Given
+    
     let expectedData = """
         {
           "locations":
@@ -61,14 +63,18 @@ final class NetworkServiceTests: XCTestCase {
     }
     
     let url = URL(string: "https://example.com/locations")!
+    
+    // When
     let places: Places = try await sut.fetch(from: url)
     
+    // Then
     XCTAssertEqual(places.locations.first?.name, "Amsterdam")
     XCTAssertEqual(places.locations.first?.lat, 52.3547498)
     XCTAssertEqual(places.locations.first?.long, 4.8339215)
   }
   
   func test_fetch_statusCode_failure() async throws {
+    // Given
     MockURLProtocol.requestHandler = { request in
       let response = HTTPURLResponse(url: request.url!,
                                      statusCode: 404,
@@ -80,14 +86,18 @@ final class NetworkServiceTests: XCTestCase {
     
     let url = URL(string: "https://example.com/locations")!
     
+    // When
     do {
       _ = try await sut.fetch(from: url) as Places
     } catch {
+      
+      // Then
       XCTAssertEqual(error as? NetworkServiceError, NetworkServiceError.invalidResponse)
     }
   }
   
   func test_fetch_decodingError() async throws {
+    // Given
     let invalidData = "invalid data".data(using: .utf8)!
     
     MockURLProtocol.requestHandler = { request in
@@ -100,9 +110,11 @@ final class NetworkServiceTests: XCTestCase {
     
     let url = URL(string: "https://example.com/locations")!
     
+    // When
     do {
       _ = try await sut.fetch(from: url) as Places
     } catch {
+      // Then
       XCTAssertEqual(error as? NetworkServiceError, NetworkServiceError.decodingError)
     }
   }

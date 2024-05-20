@@ -26,6 +26,7 @@ struct SearchView: View {
     VStack {
       Text("search_title")
 
+      // Marco
       Picker("", selection: $selectedIndex) {
         Text("search_segmented_name").tag(SelectedIndex.name)
         Text("search_segmented_coordinates").tag(SelectedIndex.coordinates)
@@ -52,6 +53,7 @@ struct SearchView: View {
       locationName = ""
     }
     .buttonStyle(.borderedProminent)
+    .disabled(locationName == "")
   }
   
   @ViewBuilder
@@ -70,15 +72,11 @@ struct SearchView: View {
         didSetCoordinates((latitude: latitude, longitude: longitude))
       }
       .buttonStyle(.borderedProminent)
+      .disabled(latitude == "" || longitude == "")
     }
   }
 }
 
 #Preview {
-  SearchView { _ in
-    
-  } didSetCoordinates: { _ in
-    
-  }
-
+  SearchView { _ in } didSetCoordinates: { _ in }
 }
