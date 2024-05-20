@@ -6,26 +6,24 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import Places
 
 final class LocationsListViewModelTests: XCTestCase {
   
   var viewModel: LocationsListViewModel!
   var mockNetworkService: MockNetworkService!
-  var mockURLComposable: MockURLComposable!
   var mockURLOpenable: MockURLOpenable!
   var mockReverseGeocodable: MockReverseGeocodable!
   
   override func setUpWithError() throws {
     try super.setUpWithError()
     mockNetworkService = MockNetworkService()
-    mockURLComposable = MockURLComposable()
     mockURLOpenable = MockURLOpenable()
     mockReverseGeocodable = MockReverseGeocodable()
     
     viewModel = LocationsListViewModel(
       networkService: mockNetworkService,
-      urlComposable: mockURLComposable,
       urlOpenable: mockURLOpenable,
       reverseGeocodable: mockReverseGeocodable
     )
@@ -34,7 +32,6 @@ final class LocationsListViewModelTests: XCTestCase {
   override func tearDownWithError() throws {
     viewModel = nil
     mockNetworkService = nil
-    mockURLComposable = nil
     mockURLOpenable = nil
     mockReverseGeocodable = nil
     try super.tearDownWithError()
@@ -145,19 +142,26 @@ final class LocationsListViewModelTests: XCTestCase {
   
   func test_did_tap_location_success() {
     // Given
-    let location = LocationsListViewModel.LocationViewEntity(name: "Amsterdam", latitude: 52.3676, longitude: 4.9041)
+    mockURLOpenable.openedURL = URL(string: "https://example.com")
+    let location = LocationsListViewModel.LocationViewEntity(name: "Amsterdam",
+                                                             latitude: "52.3676",
+                                                             longitude: "4.9041")
     
     // When
     viewModel.didTap(location: location)
     
     // Then
     XCTAssertNotNil(mockURLOpenable.openedURL)
-    XCTAssertEqual(mockURLOpenable.openedURL?.absoluteString, "wikipedia://places?WMFArticleURL=https://en.wikipedia.org/Amsterdam")
+    XCTAssertEqual(
+      mockURLOpenable.openedURL?.absoluteString,
+      "wikipedia://places?WMFArticleURL=https://en.wikipedia.org?latitude%3D52.3676%26longitude%3D4.9041")
   }
   
   func test_did_tap_location_error() {
     // Given
-    let location = LocationsListViewModel.LocationViewEntity(name: nil, latitude: 52.3676, longitude: 4.9041)
+    let location = LocationsListViewModel.LocationViewEntity(name: nil, 
+                                                             latitude: "52.3676",
+                                                             longitude: "4.9041")
     
     // When
     viewModel.didTap(location: location)
@@ -172,9 +176,12 @@ final class LocationsListViewModelTests: XCTestCase {
   
   // MARK: - addLocation(name:)
   
-  func test_add_location_by_name_success() {
-    // Given - When
-    viewModel.addLocation(name: "New Location")
+  func test_add_location_by_name_success() async {
+    // Given
+    mockReverseGeocodable.mockCoordinate = CLLocationCoordinate2D(latitude: 52.4, longitude: 4.9)
+    
+    // When
+    await viewModel.addLocation(name: "New Location")
     
     // Then
     if case .success(let locations) = viewModel.viewState {
@@ -199,7 +206,7 @@ final class LocationsListViewModelTests: XCTestCase {
     
     // When
     await viewModel.fetchLocations()
-    viewModel.addLocation(name: "Amsterdam")
+    await viewModel.addLocation(name: "Amsterdam")
     
     // Then
     if case .success(let locations) = viewModel.viewState {
@@ -211,15 +218,27 @@ final class LocationsListViewModelTests: XCTestCase {
     }
   }
   
-  func test_did_tap_error_confirm() {
+  func test_did_tap_url_error_confirm() {
     // Given - When
-    viewModel.didTapErrorConfirm()
+    viewModel.didTapUrlErrorConfirm()
     
     // Then
     if case .success = viewModel.viewState {
-      XCTFail()
-    } else {
       XCTAssert(true)
+    } else {
+      XCTFail()
+    }
+  }
+  
+  func test_did_tap_geocode_error_confirm() {
+    // Given - When
+    viewModel.didTapGeocodeErrorConfirm()
+    
+    // Then
+    if case .idle = viewModel.bottomSheetState {
+      XCTAssert(true)
+    } else {
+      XCTFail()
     }
   }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocationsListURLComposer {
+struct LocationsListURL {
   
   static func searchURL(with latitude: String, longitude: String) -> URL? {
   

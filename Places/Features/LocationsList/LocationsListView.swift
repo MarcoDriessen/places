@@ -108,7 +108,7 @@ struct LocationsListView: View {
         })
       case .loading:
         ProgressView("location_list_loading")
-      case .error(let error):
+      case .error:
         VStack(spacing: 16) {
           Text("locations_list_geocode_error")
           Button("location_confirm_button_title") {

@@ -64,13 +64,13 @@ final class LocationsListViewModel {
       return
     }
     
-    let searchURL = LocationsListURLComposer.searchURL(with: latitude, longitude: longitude)
+    let searchURL = LocationsListURL.searchURL(with: latitude, longitude: longitude)
     guard let searchURLString = searchURL?.absoluteString else {
       viewState = .error(.urlError)
       return
     }
     
-    let deeplinkURL = LocationsListURLComposer.deeplinkURL(with: searchURLString)
+    let deeplinkURL = LocationsListURL.deeplinkURL(with: searchURLString)
     
     guard let deeplinkURL = deeplinkURL else {
       viewState = .error(.urlError)
