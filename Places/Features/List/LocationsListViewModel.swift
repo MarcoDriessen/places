@@ -108,8 +108,8 @@ final class LocationsListViewModel {
       let latitude = coordinate.latitude
       let longitude = coordinate.longitude
       let location = LocationViewEntity(name: name,
-                                        latitude: latitude,
-                                        longitude: longitude)
+                                        latitude: String(latitude),
+                                        longitude: String(longitude))
       addLocation(name: name, latitude: latitude, longitude: longitude)
     } catch {
       bottomSheetState = .error(.geocodeError)
@@ -132,7 +132,7 @@ extension LocationsListViewModel {
       bottomSheetState = .idle
       return
     }
-    let location = LocationViewEntity(name: name, latitude: latitude, longitude: longitude)
+    let location = LocationViewEntity(name: name, latitude: String(latitude), longitude: String(longitude))
     locations.append(location)
     viewState = .success(locations)
     bottomSheetState = .idle

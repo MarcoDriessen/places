@@ -68,6 +68,22 @@
         }
       }
     },
+    "locations_list_geocode_error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No location could be found"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is geen locatie gevonden"
+          }
+        }
+      }
+    },
     "locations_list_try_again" : {
       "localizations" : {
         "en" : {

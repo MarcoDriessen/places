@@ -9,7 +9,7 @@ import Foundation
 
 struct LocationsListURLComposer {
   
-  static func searchURL(with latitude: Double, longitude: Double) -> URL? {
+  static func searchURL(with latitude: String, longitude: String) -> URL? {
   
     var components = URLComponents()
     
@@ -17,8 +17,8 @@ struct LocationsListURLComposer {
     components.host = "en.wikipedia.org"
     
     let queryItems = [
-      URLQueryItem(name: "latitude", value: String(latitude)),
-      URLQueryItem(name: "longitude", value: String(longitude))
+      URLQueryItem(name: "latitude", value: latitude),
+      URLQueryItem(name: "longitude", value: longitude)
     ]
     
     components.queryItems = queryItems

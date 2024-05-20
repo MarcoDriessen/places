@@ -49,10 +49,18 @@ struct LocationsListView: View {
   private func successView(locations: [LocationsListViewModel.LocationViewEntity]) -> some View {
     VStack {
       List(locations, id: \.id) { location in
-        // Marco
-        Button(location.name ?? "") {
+        Button(action: {
           viewModel.didTap(location: location)
-        }
+        }, label: {
+          VStack(alignment: .leading) {
+            Text(location.name ?? "")
+            HStack {
+              Text(location.latitude ?? "")
+              Text(location.longitude ?? "")
+            }
+            .font(.caption)
+          }
+        })
       }
     }
     .sheet(isPresented: $viewModel.showBottomSheet) {
@@ -101,8 +109,8 @@ struct LocationsListView: View {
       case .loading:
         ProgressView("location_list_loading")
       case .error(let error):
-        // Marco
-        VStack {
+        VStack(spacing: 16) {
+          Text("locations_list_geocode_error")
           Button("location_confirm_button_title") {
             viewModel.didTapGeocodeErrorConfirm()
           }

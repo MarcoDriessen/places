@@ -11,8 +11,8 @@ extension LocationsListViewModel {
   struct LocationViewEntity: Equatable, Identifiable {
     var id = UUID()
     let name: String?
-    let latitude: Double?
-    let longitude: Double?
+    let latitude: String?
+    let longitude: String?
   }
 }
 
@@ -20,7 +20,7 @@ extension Location {
   var toLocationViewEntity: LocationsListViewModel.LocationViewEntity {
     LocationsListViewModel.LocationViewEntity(
       name: name,
-      latitude: lat,
-      longitude: long)
+      latitude: String(lat),
+      longitude: String(long))
   }
 }
