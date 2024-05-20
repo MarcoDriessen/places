@@ -18,9 +18,7 @@
 		7739D2E42BF8EAB100D7A054 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2E32BF8EAB100D7A054 /* NetworkServiceTests.swift */; };
 		7739D2EB2BF8EEEA00D7A054 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2EA2BF8EEEA00D7A054 /* MockURLProtocol.swift */; };
 		7739D2F12BF9030600D7A054 /* LocationsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2F02BF9030600D7A054 /* LocationsListViewModel.swift */; };
-		7739D2FA2BFA0E0D00D7A054 /* URLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */; };
 		7739D2FD2BFA0F8C00D7A054 /* URLComposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2FC2BFA0F8C00D7A054 /* URLComposableTests.swift */; };
-		7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */; };
 		7739D3052BFA200F00D7A054 /* URLOpenable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3042BFA200F00D7A054 /* URLOpenable.swift */; };
 		7739D30C2BFA252500D7A054 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D30B2BFA252500D7A054 /* SearchView.swift */; };
 		7739D3112BFA31F000D7A054 /* ReverseGeocodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3102BFA31F000D7A054 /* ReverseGeocodable.swift */; };
@@ -34,6 +32,7 @@
 		7739D3212BFB356300D7A054 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3202BFB356300D7A054 /* Constants.swift */; };
 		7739D3232BFB37CE00D7A054 /* LocationsListError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3222BFB37CE00D7A054 /* LocationsListError.swift */; };
 		7739D3262BFB3B0800D7A054 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7739D3252BFB3B0800D7A054 /* Localizable.xcstrings */; };
+		7739D3282BFB690C00D7A054 /* LocationsListURLComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D3272BFB690C00D7A054 /* LocationsListURLComposer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +59,7 @@
 		7739D2E32BF8EAB100D7A054 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		7739D2EA2BF8EEEA00D7A054 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		7739D2F02BF9030600D7A054 /* LocationsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListViewModel.swift; sourceTree = "<group>"; };
-		7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComposable.swift; sourceTree = "<group>"; };
 		7739D2FC2BFA0F8C00D7A054 /* URLComposableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComposableTests.swift; sourceTree = "<group>"; };
-		7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultURLComposable.swift; sourceTree = "<group>"; };
 		7739D3042BFA200F00D7A054 /* URLOpenable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLOpenable.swift; sourceTree = "<group>"; };
 		7739D30B2BFA252500D7A054 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		7739D3102BFA31F000D7A054 /* ReverseGeocodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeocodable.swift; sourceTree = "<group>"; };
@@ -76,6 +73,7 @@
 		7739D3202BFB356300D7A054 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7739D3222BFB37CE00D7A054 /* LocationsListError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListError.swift; sourceTree = "<group>"; };
 		7739D3252BFB3B0800D7A054 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		7739D3272BFB690C00D7A054 /* LocationsListURLComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListURLComposer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +189,7 @@
 				7739D2F02BF9030600D7A054 /* LocationsListViewModel.swift */,
 				7739D31E2BFB353D00D7A054 /* LocationViewEntity.swift */,
 				7739D3222BFB37CE00D7A054 /* LocationsListError.swift */,
+				7739D3272BFB690C00D7A054 /* LocationsListURLComposer.swift */,
 				7739D3202BFB356300D7A054 /* Constants.swift */,
 			);
 			path = List;
@@ -200,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				7739D3032BFA1FFD00D7A054 /* URLOpenable */,
-				7739D3022BFA1FEF00D7A054 /* URLComposable */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -215,15 +213,6 @@
 				7739D31C2BFB2D6700D7A054 /* MockURLComposable.swift */,
 			);
 			path = Mocks;
-			sourceTree = "<group>";
-		};
-		7739D3022BFA1FEF00D7A054 /* URLComposable */ = {
-			isa = PBXGroup;
-			children = (
-				7739D2F92BFA0E0D00D7A054 /* URLComposable.swift */,
-				7739D2FE2BFA10D200D7A054 /* DefaultURLComposable.swift */,
-			);
-			path = URLComposable;
 			sourceTree = "<group>";
 		};
 		7739D3032BFA1FFD00D7A054 /* URLOpenable */ = {
@@ -365,14 +354,13 @@
 				7739D2C72BF8E07E00D7A054 /* LocationsListView.swift in Sources */,
 				7739D2D52BF8E32000D7A054 /* NetworkService.swift in Sources */,
 				7739D2DC2BF8E9A600D7A054 /* Location.swift in Sources */,
-				7739D2FF2BFA10D200D7A054 /* DefaultURLComposable.swift in Sources */,
+				7739D3282BFB690C00D7A054 /* LocationsListURLComposer.swift in Sources */,
 				7739D3232BFB37CE00D7A054 /* LocationsListError.swift in Sources */,
 				7739D3212BFB356300D7A054 /* Constants.swift in Sources */,
 				7739D2D72BF8E59A00D7A054 /* DefaultNetworkService.swift in Sources */,
 				7739D2F12BF9030600D7A054 /* LocationsListViewModel.swift in Sources */,
 				7739D3052BFA200F00D7A054 /* URLOpenable.swift in Sources */,
 				7739D3132BFA323C00D7A054 /* DefaultReverseGeocodable.swift in Sources */,
-				7739D2FA2BFA0E0D00D7A054 /* URLComposable.swift in Sources */,
 				7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */,
 				7739D3112BFA31F000D7A054 /* ReverseGeocodable.swift in Sources */,
 				7739D31F2BFB353D00D7A054 /* LocationViewEntity.swift in Sources */,

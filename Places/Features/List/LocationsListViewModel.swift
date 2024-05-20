@@ -11,7 +11,7 @@ import CoreLocation
 
 @Observable
 final class LocationsListViewModel {
-
+  
   enum ViewState {
     case loading
     case success([LocationViewEntity])
@@ -31,19 +31,13 @@ final class LocationsListViewModel {
   private var locations: [LocationViewEntity] = []
   
   private let networkService: NetworkService
-  private let searchURLComposable: URLComposable
-  private let deeplinkURLComposable: URLComposable
   private let urlOpenable: URLOpenable
   private let reverseGeocodable: ReverseGeocodable
   
   init(networkService: NetworkService,
-       searchURLComposable: URLComposable,
-       deeplinkURLComposable: URLComposable,
        urlOpenable: URLOpenable,
        reverseGeocodable: ReverseGeocodable) {
     self.networkService = networkService
-    self.searchURLComposable = searchURLComposable
-    self.deeplinkURLComposable = deeplinkURLComposable
     self.urlOpenable = urlOpenable
     self.reverseGeocodable = reverseGeocodable
   }
@@ -70,33 +64,20 @@ final class LocationsListViewModel {
       return
     }
     
-    var searchUrl = searchURLComposable
-      .setScheme("https")
-      .setHost("en.wikipedia.org")
-
-    searchUrl = searchUrl
-      .addQueryItem(name: "latitude", value: String(latitude))
-      .addQueryItem(name: "longitude", value: String(longitude))
-    
-    var deeplinkUrl = deeplinkURLComposable
-      .setScheme("wikipedia")
-      .setHost("places")
-      .setPath("")
-    
-    guard let searchUrlString = searchUrl.url?.absoluteString else {
+    let searchURL = LocationsListURLComposer.searchURL(with: latitude, longitude: longitude)
+    guard let searchURLString = searchURL?.absoluteString else {
       viewState = .error(.urlError)
       return
     }
     
-    deeplinkUrl = deeplinkUrl
-      .addQueryItem(name: "WMFArticleURL", value: searchUrlString)
+    let deeplinkURL = LocationsListURLComposer.deeplinkURL(with: searchURLString)
     
-    guard let deeplinkUrl = deeplinkUrl.url else {
+    guard let deeplinkURL = deeplinkURL else {
       viewState = .error(.urlError)
       return
     }
     
-    urlOpenable.open(deeplinkUrl, options: [:], completionHandler: nil)
+    urlOpenable.open(deeplinkURL, options: [:], completionHandler: nil)
   }
   
   func addLocation(latitude: String, longitude: String) async {
@@ -113,16 +94,7 @@ final class LocationsListViewModel {
     do {
       let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
       let name = try await reverseGeocodable.getLocationName(coordinate: coordinate)
-      
-      guard !locations.contains(where: { $0.name == name }) else {
-        bottomSheetState = .idle
-        return
-      }
-      let location = LocationViewEntity(name: name, latitude: latitude, longitude: longitude)
-      locations.append(location)
-      viewState = .success(locations)
-      bottomSheetState = .idle
-      showBottomSheet = false
+      addLocation(name: name, latitude: latitude, longitude: longitude)
     } catch {
       bottomSheetState = .error(.geocodeError)
     }
@@ -133,29 +105,15 @@ final class LocationsListViewModel {
     
     do {
       let coordinate = try await reverseGeocodable.getCoordinates(name: name)
+      let latitude = coordinate.latitude
+      let longitude = coordinate.longitude
       let location = LocationViewEntity(name: name,
-                                        latitude: coordinate.latitude,
-                                        longitude: coordinate.longitude)
-      guard !locations.contains(where: { $0.name == name }) else {
-        bottomSheetState = .idle
-        return
-      }
-      locations.append(location)
-      viewState = .success(locations)
-      bottomSheetState = .idle
-      showBottomSheet = false
+                                        latitude: latitude,
+                                        longitude: longitude)
+      addLocation(name: name, latitude: latitude, longitude: longitude)
     } catch {
       bottomSheetState = .error(.geocodeError)
     }
-    
-    guard !locations.contains(where: { $0.name == name }) else {
-      return
-    }
-    let location = LocationViewEntity(name: name, latitude: nil, longitude: nil)
-    locations.append(location)
-    viewState = .success(locations)
-    bottomSheetState = .idle
-    showBottomSheet = false
   }
   
   func didTapGeocodeErrorConfirm() {
@@ -164,5 +122,20 @@ final class LocationsListViewModel {
   
   func didTapUrlErrorConfirm() {
     viewState = .success(locations)
+  }
+}
+
+// MARK: - Private
+extension LocationsListViewModel {
+  fileprivate func addLocation(name: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    guard !locations.contains(where: { $0.name == name }) else {
+      bottomSheetState = .idle
+      return
+    }
+    let location = LocationViewEntity(name: name, latitude: latitude, longitude: longitude)
+    locations.append(location)
+    viewState = .success(locations)
+    bottomSheetState = .idle
+    showBottomSheet = false
   }
 }
