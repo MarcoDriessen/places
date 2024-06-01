@@ -23,9 +23,17 @@ struct PlacesApp: App {
     
     let viewModel = LocationsListViewModel(
       networkService: networkService,
-      urlOpenable: urlOpenable,
-      reverseGeocodable: reverseGeocodable)
+      urlOpenable: urlOpenable
+    )
     
-    LocationsListView(viewModel: viewModel)
+    let searchViewModel = SearchViewModel(
+      reverseGeocodable: reverseGeocodable, 
+      locationAddable: viewModel
+    )
+    
+    LocationsListView(
+      viewModel: viewModel,
+      searchViewModel: searchViewModel
+    )
   }
 }

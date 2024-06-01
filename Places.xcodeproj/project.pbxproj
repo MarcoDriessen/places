@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772AE76D2C0B3A02006AA596 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE76C2C0B3A02006AA596 /* SearchViewModel.swift */; };
+		772AE7702C0B420C006AA596 /* LocationAddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE76F2C0B420C006AA596 /* LocationAddable.swift */; };
+		772AE7722C0B435A006AA596 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */; };
+		772AE7742C0B43AE006AA596 /* MockPlacesAddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */; };
 		7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */; };
 		7739D2C72BF8E07E00D7A054 /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */; };
 		7739D2C92BF8E07F00D7A054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7739D2C82BF8E07F00D7A054 /* Assets.xcassets */; };
@@ -44,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		772AE76C2C0B3A02006AA596 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		772AE76F2C0B420C006AA596 /* LocationAddable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAddable.swift; sourceTree = "<group>"; };
+		772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
+		772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlacesAddable.swift; sourceTree = "<group>"; };
 		7739D2C12BF8E07E00D7A054 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesApp.swift; sourceTree = "<group>"; };
 		7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
@@ -164,6 +172,7 @@
 				7739D2FB2BFA0F7900D7A054 /* Mocks */,
 				7739D2E32BF8EAB100D7A054 /* NetworkServiceTests.swift */,
 				7739D31A2BFB2D2900D7A054 /* LocationsListViewModelTests.swift */,
+				772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */,
 			);
 			path = PlacesTests;
 			sourceTree = "<group>";
@@ -205,6 +214,7 @@
 				7739D3142BFB2C6C00D7A054 /* MockNetworkService.swift */,
 				7739D3162BFB2CDE00D7A054 /* MockURLOpenable.swift */,
 				7739D3182BFB2CFE00D7A054 /* MockReverseGeocoable.swift */,
+				772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -221,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				7739D30B2BFA252500D7A054 /* SearchView.swift */,
+				772AE76C2C0B3A02006AA596 /* SearchViewModel.swift */,
+				772AE76F2C0B420C006AA596 /* LocationAddable.swift */,
 			);
 			path = LocationsSearch;
 			sourceTree = "<group>";
@@ -346,7 +358,9 @@
 			files = (
 				7739D2DA2BF8E9A000D7A054 /* Places.swift in Sources */,
 				7739D2C72BF8E07E00D7A054 /* LocationsListView.swift in Sources */,
+				772AE76D2C0B3A02006AA596 /* SearchViewModel.swift in Sources */,
 				7739D2D52BF8E32000D7A054 /* NetworkService.swift in Sources */,
+				772AE7702C0B420C006AA596 /* LocationAddable.swift in Sources */,
 				7739D2DC2BF8E9A600D7A054 /* Location.swift in Sources */,
 				7739D3282BFB690C00D7A054 /* LocationsListURL.swift in Sources */,
 				7739D3232BFB37CE00D7A054 /* LocationsListError.swift in Sources */,
@@ -367,10 +381,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7739D3152BFB2C6C00D7A054 /* MockNetworkService.swift in Sources */,
+				772AE7742C0B43AE006AA596 /* MockPlacesAddable.swift in Sources */,
 				7739D2E42BF8EAB100D7A054 /* NetworkServiceTests.swift in Sources */,
 				7739D2EB2BF8EEEA00D7A054 /* MockURLProtocol.swift in Sources */,
 				7739D31B2BFB2D2900D7A054 /* LocationsListViewModelTests.swift in Sources */,
 				7739D3192BFB2CFE00D7A054 /* MockReverseGeocoable.swift in Sources */,
+				772AE7722C0B435A006AA596 /* SearchViewModelTests.swift in Sources */,
 				7739D3172BFB2CDE00D7A054 /* MockURLOpenable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

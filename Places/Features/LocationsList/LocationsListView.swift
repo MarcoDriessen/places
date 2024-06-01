@@ -11,9 +11,12 @@ import SwiftUI
 struct LocationsListView: View {
   
   @State private var viewModel: LocationsListViewModel
+  private var searchViewModel: SearchViewModel
   
-  init(viewModel: LocationsListViewModel) {
+  init(viewModel: LocationsListViewModel,
+       searchViewModel: SearchViewModel) {
     _viewModel = State(wrappedValue: viewModel)
+    self.searchViewModel = searchViewModel
   }
   
   var body: some View {
@@ -68,11 +71,12 @@ struct LocationsListView: View {
       }
     }
     .sheet(isPresented: $viewModel.showBottomSheet) {
-      bottomSheetSearchView
+      SearchView(viewModel: searchViewModel)
+        .presentationDetents([.medium])
     }
   }
   
-  @ViewBuilder 
+  @ViewBuilder
   private func errorView(error: LocationsListViewModel.LocationsListError) -> some View {
     switch error {
     case .fetchError:
@@ -80,9 +84,7 @@ struct LocationsListView: View {
         Text("locations_list_fetch_error")
           .multilineTextAlignment(.center)
         Button("locations_list_try_again") {
-          Task {
-            await viewModel.fetchLocations()
-          }
+          viewModel.fetchLocations()
         }
         .buttonStyle(.borderedProminent)
       })
@@ -96,33 +98,5 @@ struct LocationsListView: View {
         .buttonStyle(.borderedProminent)
       })
     }
-  }
-  
-  @ViewBuilder 
-  private var bottomSheetSearchView: some View {
-    VStack {
-      switch viewModel.bottomSheetState {
-      case .idle:
-        SearchView(didSetLocationName: { locationName in
-          viewModel.addLocation(name: locationName)
-        }, didSetCoordinates: { coordinates in
-          viewModel.addLocation(
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude
-          )
-        })
-      case .loading:
-        ProgressView("location_list_loading")
-      case .error:
-        VStack(spacing: 16) {
-          Text("locations_list_geocode_error")
-          Button("location_confirm_button_title") {
-            viewModel.didTapGeocodeErrorConfirm()
-          }
-          .buttonStyle(.borderedProminent)
-        }
-      }
-    }
-    .presentationDetents([.medium])
   }
 }

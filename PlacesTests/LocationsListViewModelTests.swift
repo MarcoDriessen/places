@@ -14,18 +14,15 @@ final class LocationsListViewModelTests: XCTestCase {
   var viewModel: LocationsListViewModel!
   var mockNetworkService: MockNetworkService!
   var mockURLOpenable: MockURLOpenable!
-  var mockReverseGeocodable: MockReverseGeocodable!
   
   override func setUpWithError() throws {
     try super.setUpWithError()
     mockNetworkService = MockNetworkService()
     mockURLOpenable = MockURLOpenable()
-    mockReverseGeocodable = MockReverseGeocodable()
     
     viewModel = LocationsListViewModel(
       networkService: mockNetworkService,
-      urlOpenable: mockURLOpenable,
-      reverseGeocodable: mockReverseGeocodable
+      urlOpenable: mockURLOpenable
     )
   }
   
@@ -33,7 +30,6 @@ final class LocationsListViewModelTests: XCTestCase {
     viewModel = nil
     mockNetworkService = nil
     mockURLOpenable = nil
-    mockReverseGeocodable = nil
     try super.tearDownWithError()
   }
   
@@ -123,52 +119,6 @@ final class LocationsListViewModelTests: XCTestCase {
     waitForExpectations(timeout: 0.1)
   }
   
-  // MARK: - addLocation(latitude:longitude:)
-  
-  func test_add_location_by_coordinate_success() {
-    // Given
-    mockReverseGeocodable.mockName = "Amsterdam"
-    let expectation = expectation(description: "Location added")
-    
-    // When
-    viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
-    
-    // Then
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      if case .success(let locations) = self.viewModel.viewState, case .idle = self.viewModel.bottomSheetState {
-        XCTAssertEqual(locations.count, 1)
-        XCTAssertEqual(locations.first?.name, "Amsterdam")
-        expectation.fulfill()
-      } else {
-        XCTFail()
-        expectation.fulfill()
-      }
-    }
-
-    waitForExpectations(timeout: 1)
-  }
-  
-  func test_add_location_by_coordinates_failure() {
-    // Given
-    mockReverseGeocodable.error = ReverseGeocodableError.unknownLocation
-    let expectation = expectation(description: "Location error")
-    
-    // When
-    viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
-    
-    // Then
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      if case .error(let error) = self.viewModel.bottomSheetState {
-        XCTAssertNotNil(error)
-        expectation.fulfill()
-      } else {
-        XCTFail("Expected error state")
-        expectation.fulfill()
-      }
-    }
-    
-    waitForExpectations(timeout: 1)
-  }
   
   // MARK: - didTap(location:)
   
@@ -210,11 +160,10 @@ final class LocationsListViewModelTests: XCTestCase {
   
   func test_add_location_by_name_success() {
     // Given
-    mockReverseGeocodable.mockCoordinate = CLLocationCoordinate2D(latitude: 52.4, longitude: 4.9)
     let expectation = expectation(description: "Location added")
     
     // When
-    viewModel.addLocation(name: "New Location")
+    viewModel.addLocation(name: "New Location", latitude: 53.76, longitude: 4.73)
     
     // Then
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -246,7 +195,7 @@ final class LocationsListViewModelTests: XCTestCase {
     
     // When
     viewModel.fetchLocations()
-    viewModel.addLocation(name: "Amsterdam")
+    viewModel.addLocation(name: "Amsterdam", latitude: 52.3676, longitude: 4.9041)
     
     // Then
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -270,18 +219,6 @@ final class LocationsListViewModelTests: XCTestCase {
     
     // Then
     if case .success = viewModel.viewState {
-      XCTAssert(true)
-    } else {
-      XCTFail()
-    }
-  }
-  
-  func test_did_tap_geocode_error_confirm() {
-    // Given - When
-    viewModel.didTapGeocodeErrorConfirm()
-    
-    // Then
-    if case .idle = viewModel.bottomSheetState {
       XCTAssert(true)
     } else {
       XCTFail()
