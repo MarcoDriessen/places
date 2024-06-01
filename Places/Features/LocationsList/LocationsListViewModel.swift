@@ -12,7 +12,7 @@ import CoreLocation
 @Observable
 final class LocationsListViewModel {
   
-  enum ViewState {
+  enum ViewState: Equatable {
     case loading
     case success([LocationViewEntity])
     case error(LocationsListError)
@@ -65,6 +65,11 @@ final class LocationsListViewModel {
     
     guard let deeplinkURL = deeplinkURL else {
       viewState = .error(.urlError)
+      return
+    }
+    
+    guard urlOpenable.canOpenURL(deeplinkURL) else {
+      viewState = .error(.openURLError)
       return
     }
     
