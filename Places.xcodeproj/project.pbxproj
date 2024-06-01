@@ -12,7 +12,6 @@
 		772AE7722C0B435A006AA596 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */; };
 		772AE7742C0B43AE006AA596 /* MockPlacesAddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */; };
 		772AE7762C0B479C006AA596 /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7752C0B479C006AA596 /* SearchError.swift */; };
-		772AE77B2C0B5050006AA596 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 772AE77A2C0B5050006AA596 /* Info.plist */; };
 		7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */; };
 		7739D2C72BF8E07E00D7A054 /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */; };
 		7739D2C92BF8E07F00D7A054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7739D2C82BF8E07F00D7A054 /* Assets.xcassets */; };
@@ -342,7 +341,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				772AE77B2C0B5050006AA596 /* Info.plist in Resources */,
 				7739D2CC2BF8E07F00D7A054 /* Preview Assets.xcassets in Resources */,
 				7739D2C92BF8E07F00D7A054 /* Assets.xcassets in Resources */,
 				7739D3262BFB3B0800D7A054 /* Localizable.xcstrings in Resources */,
