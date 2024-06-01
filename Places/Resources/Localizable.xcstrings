@@ -100,6 +100,38 @@
         }
       }
     },
+    "locations_list_open_url_error" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Wikipedia app is not installed"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De Wikipedia app is niet geïnstalleerd"
+          }
+        }
+      }
+    },
+    "locations_list_open_url_error_confirm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oké"
+          }
+        }
+      }
+    },
     "locations_list_try_again" : {
       "localizations" : {
         "en" : {

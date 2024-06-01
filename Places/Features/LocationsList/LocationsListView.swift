@@ -97,6 +97,15 @@ struct LocationsListView: View {
         }
         .buttonStyle(.borderedProminent)
       })
+    case .openURLError:
+      VStack(spacing: 16, content: {
+        Text("locations_list_open_url_error")
+          .multilineTextAlignment(.center)
+        Button("locations_list_open_url_error_confirm") {
+          viewModel.didTapUrlErrorConfirm()
+        }
+        .buttonStyle(.borderedProminent)
+      })
     }
   }
 }
