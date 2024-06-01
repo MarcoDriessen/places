@@ -10,12 +10,7 @@ import CoreLocation
 
 @Observable
 final class SearchViewModel {
-  
-  enum GeocodeError: Error {
-    case geocodeError
-    case invalidFormat
-  }
-  
+    
   enum ViewState {
     case idle
     case loading
