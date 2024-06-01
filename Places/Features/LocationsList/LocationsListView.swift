@@ -28,8 +28,8 @@ struct LocationsListView: View {
               .accessibilityLabel(Text("add_location"))
           }
         }
-        .task {
-          await viewModel.fetchLocations()
+        .onAppear {
+          viewModel.fetchLocations()
         }
     }
   }
@@ -104,13 +104,12 @@ struct LocationsListView: View {
       switch viewModel.bottomSheetState {
       case .idle:
         SearchView(didSetLocationName: { locationName in
-          Task {
-            await viewModel.addLocation(name: locationName)
-          }
+          viewModel.addLocation(name: locationName)
         }, didSetCoordinates: { coordinates in
-          Task {
-            await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-          }
+          viewModel.addLocation(
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude
+          )
         })
       case .loading:
         ProgressView("location_list_loading")

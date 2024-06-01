@@ -42,19 +42,21 @@ final class LocationsListViewModel {
     self.reverseGeocodable = reverseGeocodable
   }
   
-  func fetchLocations() async {
-    guard let url = URL(string: Constants.locationsURLString) else {
-      return
-    }
-    
-    do {
-      let places: Places = try await networkService.fetch(from: url)
-      locations = places.locations
-        .filter { $0.name != nil }
-        .map { $0.toLocationViewEntity }
-      viewState = .success(locations)
-    } catch {
-      viewState = .error(.fetchError)
+  func fetchLocations() {
+    Task {
+      guard let url = URL(string: Constants.locationsURLString) else {
+        return
+      }
+      
+      do {
+        let places: Places = try await networkService.fetch(from: url)
+        locations = places.locations
+          .filter { $0.name != nil }
+          .map { $0.toLocationViewEntity }
+        viewState = .success(locations)
+      } catch {
+        viewState = .error(.fetchError)
+      }
     }
   }
   
@@ -79,34 +81,38 @@ final class LocationsListViewModel {
     urlOpenable.open(deeplinkURL, options: [:], completionHandler: nil)
   }
   
-  func addLocation(latitude: String, longitude: String) async {
-    bottomSheetState = .loading
-    
-    let formattedLatitude = latitude.replacingOccurrences(of: ",", with: ".")
-    let formattedLongitude = longitude.replacingOccurrences(of: ",", with: ".")
-    
-    guard let latitude = Double(formattedLatitude), let longitude = Double(formattedLongitude) else {
-      bottomSheetState = .error(.invalidFormat)
-      return
-    }
-    
-    do {
-      let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-      let name = try await reverseGeocodable.getLocationName(coordinate: coordinate)
-      addLocation(name: name, latitude: latitude, longitude: longitude)
-    } catch {
-      bottomSheetState = .error(.geocodeError)
+  func addLocation(latitude: String, longitude: String) {
+    Task {
+      bottomSheetState = .loading
+      
+      let formattedLatitude = latitude.replacingOccurrences(of: ",", with: ".")
+      let formattedLongitude = longitude.replacingOccurrences(of: ",", with: ".")
+      
+      guard let latitude = Double(formattedLatitude), let longitude = Double(formattedLongitude) else {
+        bottomSheetState = .error(.invalidFormat)
+        return
+      }
+      
+      do {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let name = try await reverseGeocodable.getLocationName(coordinate: coordinate)
+        addLocation(name: name, latitude: latitude, longitude: longitude)
+      } catch {
+        bottomSheetState = .error(.geocodeError)
+      }
     }
   }
   
-  func addLocation(name: String) async {
-    bottomSheetState = .loading
-    
-    do {
-      let coordinate = try await reverseGeocodable.getCoordinates(name: name)
-      addLocation(name: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
-    } catch {
-      bottomSheetState = .error(.geocodeError)
+  func addLocation(name: String) {
+    Task {
+      bottomSheetState = .loading
+      
+      do {
+        let coordinate = try await reverseGeocodable.getCoordinates(name: name)
+        addLocation(name: name, latitude: coordinate.latitude, longitude: coordinate.longitude)
+      } catch {
+        bottomSheetState = .error(.geocodeError)
+      }
     }
   }
   

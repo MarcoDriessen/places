@@ -39,7 +39,7 @@ final class LocationsListViewModelTests: XCTestCase {
   
   // MARK: - fetchLocations()
   
-  func test_fetch_locations_success() async {
+  func test_fetch_locations_success() {
     // Given
     let expectedData = """
     {
@@ -49,23 +49,28 @@ final class LocationsListViewModelTests: XCTestCase {
         ]
     }
     """.data(using: .utf8)!
-    
+    let expectation = expectation(description: "Fetch locations success")
     mockNetworkService.mockData = expectedData
     
     // When
-    await viewModel.fetchLocations()
+    viewModel.fetchLocations()
     
     // Then
-    if case .success(let locations) = viewModel.viewState {
-      XCTAssertEqual(locations.count, 2)
-      XCTAssertEqual(locations.first?.name, "Amsterdam")
-    } else {
-      XCTFail()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .success(let locations) = self.viewModel.viewState {
+        XCTAssertEqual(locations.count, 2)
+        XCTAssertEqual(locations.first?.name, "Amsterdam")
+        expectation.fulfill()
+      } else {
+        XCTFail()
+        expectation.fulfill()
+      }
     }
     
+    waitForExpectations(timeout: 0.1)
   }
   
-  func test_fetch_locations_success_filters_empty_name() async {
+  func test_fetch_locations_success_filters_empty_name() {
     // Given
     let expectedData = """
     {
@@ -75,67 +80,94 @@ final class LocationsListViewModelTests: XCTestCase {
         ]
     }
     """.data(using: .utf8)!
-    
+    let expectation = expectation(description: "Filter empty name")
     mockNetworkService.mockData = expectedData
     
     // When
-    await viewModel.fetchLocations()
+    viewModel.fetchLocations()
     
     // Then
-    if case .success(let locations) = viewModel.viewState {
-      XCTAssertEqual(locations.count, 1)
-      XCTAssertEqual(locations.first?.name, "Rotterdam")
-    } else {
-      XCTFail()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .success(let locations) = self.viewModel.viewState {
+        XCTAssertEqual(locations.count, 1)
+        XCTAssertEqual(locations.first?.name, "Rotterdam")
+        expectation.fulfill()
+      } else {
+        XCTFail()
+        expectation.fulfill()
+      }
     }
+    
+    waitForExpectations(timeout: 0.1)
   }
   
-  func test_fetch_locations_error() async {
+  func test_fetch_locations_error() {
     // Given
     mockNetworkService.error = NetworkServiceError.invalidResponse
+    let expectation = expectation(description: "Fetch locations error")
     
     // When
-    await viewModel.fetchLocations()
+    viewModel.fetchLocations()
     
     // Then
-    if case .error(let error) = viewModel.viewState {
-      XCTAssertNotNil(error)
-    } else {
-      XCTFail("Expected error state")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .error(let error) = self.viewModel.viewState {
+        XCTAssertNotNil(error)
+        expectation.fulfill()
+      } else {
+        XCTFail("Expected error state")
+        expectation.fulfill()
+      }
     }
+    
+    waitForExpectations(timeout: 0.1)
   }
   
   // MARK: - addLocation(latitude:longitude:)
   
-  func test_add_location_by_coordinate_success() async {
+  func test_add_location_by_coordinate_success() {
     // Given
     mockReverseGeocodable.mockName = "Amsterdam"
+    let expectation = expectation(description: "Location added")
     
     // When
-    await viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
+    viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
     
     // Then
-    if case .success(let locations) = viewModel.viewState, case .idle = viewModel.bottomSheetState {
-      XCTAssertEqual(locations.count, 1)
-      XCTAssertEqual(locations.first?.name, "Amsterdam")
-    } else {
-      XCTFail()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .success(let locations) = self.viewModel.viewState, case .idle = self.viewModel.bottomSheetState {
+        XCTAssertEqual(locations.count, 1)
+        XCTAssertEqual(locations.first?.name, "Amsterdam")
+        expectation.fulfill()
+      } else {
+        XCTFail()
+        expectation.fulfill()
+      }
     }
+
+    waitForExpectations(timeout: 1)
   }
   
-  func test_add_location_by_coordinates_failure() async {
+  func test_add_location_by_coordinates_failure() {
     // Given
     mockReverseGeocodable.error = ReverseGeocodableError.unknownLocation
+    let expectation = expectation(description: "Location error")
     
     // When
-    await viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
+    viewModel.addLocation(latitude: "52.3676", longitude: "4.9041")
     
     // Then
-    if case .error(let error) = viewModel.bottomSheetState {
-      XCTAssertNotNil(error)
-    } else {
-      XCTFail("Expected error state")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .error(let error) = self.viewModel.bottomSheetState {
+        XCTAssertNotNil(error)
+        expectation.fulfill()
+      } else {
+        XCTFail("Expected error state")
+        expectation.fulfill()
+      }
     }
+    
+    waitForExpectations(timeout: 1)
   }
   
   // MARK: - didTap(location:)
@@ -176,23 +208,30 @@ final class LocationsListViewModelTests: XCTestCase {
   
   // MARK: - addLocation(name:)
   
-  func test_add_location_by_name_success() async {
+  func test_add_location_by_name_success() {
     // Given
     mockReverseGeocodable.mockCoordinate = CLLocationCoordinate2D(latitude: 52.4, longitude: 4.9)
+    let expectation = expectation(description: "Location added")
     
     // When
-    await viewModel.addLocation(name: "New Location")
+    viewModel.addLocation(name: "New Location")
     
     // Then
-    if case .success(let locations) = viewModel.viewState {
-      XCTAssertEqual(locations.count, 1)
-      XCTAssertEqual(locations.first?.name, "New Location")
-    } else {
-      XCTFail("Expected success state with locations")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .success(let locations) = self.viewModel.viewState {
+        XCTAssertEqual(locations.count, 1)
+        XCTAssertEqual(locations.first?.name, "New Location")
+        expectation.fulfill()
+      } else {
+        XCTFail("Expected success state with locations")
+        expectation.fulfill()
+      }
     }
+    
+    waitForExpectations(timeout: 1)
   }
   
-  func test_add_location_by_name_duplicate_does_not_add() async {
+  func test_add_location_by_name_duplicate_does_not_add() {
     // Given
     let expectedData = """
     {
@@ -203,19 +242,26 @@ final class LocationsListViewModelTests: XCTestCase {
     }
     """.data(using: .utf8)!
     mockNetworkService.mockData = expectedData
+    let expectation = expectation(description: "Add Location duplicate does not add")
     
     // When
-    await viewModel.fetchLocations()
-    await viewModel.addLocation(name: "Amsterdam")
+    viewModel.fetchLocations()
+    viewModel.addLocation(name: "Amsterdam")
     
     // Then
-    if case .success(let locations) = viewModel.viewState {
-      XCTAssertNotEqual(locations.count, 3)
-      XCTAssertEqual(locations.count, 2)
-      XCTAssertEqual(locations.first?.name, "Amsterdam")
-    } else {
-      XCTFail("Expected success state with locations")
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .success(let locations) = self.viewModel.viewState {
+        XCTAssertNotEqual(locations.count, 3)
+        XCTAssertEqual(locations.count, 2)
+        XCTAssertEqual(locations.first?.name, "Amsterdam")
+        expectation.fulfill()
+      } else {
+        XCTFail("Expected success state with locations")
+        expectation.fulfill()
+      }
     }
+    
+    waitForExpectations(timeout: 0.1)
   }
   
   func test_did_tap_url_error_confirm() {
