@@ -12,6 +12,7 @@
 		772AE7722C0B435A006AA596 /* SearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */; };
 		772AE7742C0B43AE006AA596 /* MockPlacesAddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */; };
 		772AE7762C0B479C006AA596 /* SearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AE7752C0B479C006AA596 /* SearchError.swift */; };
+		772AE77B2C0B5050006AA596 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 772AE77A2C0B5050006AA596 /* Info.plist */; };
 		7739D2C52BF8E07E00D7A054 /* PlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */; };
 		7739D2C72BF8E07E00D7A054 /* LocationsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */; };
 		7739D2C92BF8E07F00D7A054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7739D2C82BF8E07F00D7A054 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		772AE7712C0B435A006AA596 /* SearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTests.swift; sourceTree = "<group>"; };
 		772AE7732C0B43AE006AA596 /* MockPlacesAddable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlacesAddable.swift; sourceTree = "<group>"; };
 		772AE7752C0B479C006AA596 /* SearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchError.swift; sourceTree = "<group>"; };
+		772AE77A2C0B5050006AA596 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7739D2C12BF8E07E00D7A054 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesApp.swift; sourceTree = "<group>"; };
 		7739D2C62BF8E07E00D7A054 /* LocationsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsListView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		7739D2C32BF8E07E00D7A054 /* Places */ = {
 			isa = PBXGroup;
 			children = (
+				772AE77A2C0B5050006AA596 /* Info.plist */,
 				7739D2C42BF8E07E00D7A054 /* PlacesApp.swift */,
 				7739D2C82BF8E07F00D7A054 /* Assets.xcassets */,
 				7739D2D82BF8E99900D7A054 /* Entities */,
@@ -339,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				772AE77B2C0B5050006AA596 /* Info.plist in Resources */,
 				7739D2CC2BF8E07F00D7A054 /* Preview Assets.xcassets in Resources */,
 				7739D2C92BF8E07F00D7A054 /* Assets.xcassets in Resources */,
 				7739D3262BFB3B0800D7A054 /* Localizable.xcstrings in Resources */,
@@ -536,6 +540,7 @@
 				DEVELOPMENT_TEAM = 6U76726R8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Places/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -565,6 +570,7 @@
 				DEVELOPMENT_TEAM = 6U76726R8M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Places/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
