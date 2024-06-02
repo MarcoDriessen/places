@@ -15,5 +15,9 @@ class MockURLOpenable: URLOpenable {
     openedURL = url
     completion?(true)
   }
+  
+  func canOpenURL(_ url: URL) -> Bool {
+    true
+  }
 }
 
