@@ -11,10 +11,6 @@ extension LocationsListViewModel {
   enum LocationsListError: Error {
     case fetchError
     case urlError
-  }
-  
-  enum GeocodeError: Error {
-    case geocodeError
-    case invalidFormat
+    case openURLError
   }
 }

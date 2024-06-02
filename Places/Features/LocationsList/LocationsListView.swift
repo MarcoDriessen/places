@@ -28,8 +28,8 @@ struct LocationsListView: View {
               .accessibilityLabel(Text("add_location"))
           }
         }
-        .task {
-          await viewModel.fetchLocations()
+        .onAppear {
+          viewModel.fetchLocations()
         }
     }
   }
@@ -68,11 +68,12 @@ struct LocationsListView: View {
       }
     }
     .sheet(isPresented: $viewModel.showBottomSheet) {
-      bottomSheetSearchView
+      SearchView(viewModel: viewModel.searchViewModel)
+        .presentationDetents([.medium])
     }
   }
   
-  @ViewBuilder 
+  @ViewBuilder
   private func errorView(error: LocationsListViewModel.LocationsListError) -> some View {
     switch error {
     case .fetchError:
@@ -80,9 +81,7 @@ struct LocationsListView: View {
         Text("locations_list_fetch_error")
           .multilineTextAlignment(.center)
         Button("locations_list_try_again") {
-          Task {
-            await viewModel.fetchLocations()
-          }
+          viewModel.fetchLocations()
         }
         .buttonStyle(.borderedProminent)
       })
@@ -95,35 +94,15 @@ struct LocationsListView: View {
         }
         .buttonStyle(.borderedProminent)
       })
-    }
-  }
-  
-  @ViewBuilder 
-  private var bottomSheetSearchView: some View {
-    VStack {
-      switch viewModel.bottomSheetState {
-      case .idle:
-        SearchView(didSetLocationName: { locationName in
-          Task {
-            await viewModel.addLocation(name: locationName)
-          }
-        }, didSetCoordinates: { coordinates in
-          Task {
-            await viewModel.addLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-          }
-        })
-      case .loading:
-        ProgressView("location_list_loading")
-      case .error:
-        VStack(spacing: 16) {
-          Text("locations_list_geocode_error")
-          Button("location_confirm_button_title") {
-            viewModel.didTapGeocodeErrorConfirm()
-          }
-          .buttonStyle(.borderedProminent)
+    case .openURLError:
+      VStack(spacing: 16, content: {
+        Text("locations_list_open_url_error")
+          .multilineTextAlignment(.center)
+        Button("locations_list_open_url_error_confirm") {
+          viewModel.didTapUrlErrorConfirm()
         }
-      }
+        .buttonStyle(.borderedProminent)
+      })
     }
-    .presentationDetents([.medium])
   }
 }

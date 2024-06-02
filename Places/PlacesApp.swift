@@ -15,17 +15,25 @@ struct PlacesApp: App {
     }
   }
   
-  @ViewBuilder
   var locationsList: LocationsListView {
     let networkService = DefaultNetworkService()
     let urlOpenable = UIApplication.shared
     let reverseGeocodable = DefaultReverseGeocodable()
+        
+    let searchViewModel = SearchViewModel(
+      reverseGeocodable: reverseGeocodable
+    )
     
     let viewModel = LocationsListViewModel(
       networkService: networkService,
       urlOpenable: urlOpenable,
-      reverseGeocodable: reverseGeocodable)
+      searchViewModel: searchViewModel
+    )
     
-    LocationsListView(viewModel: viewModel)
+    searchViewModel.locationAddable = viewModel
+    
+    return LocationsListView(
+      viewModel: viewModel
+    )
   }
 }
