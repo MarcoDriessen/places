@@ -16,7 +16,14 @@ final class MockLocationAddable: LocationAddable {
     addLocationCallCount > 0
   }
   
+  var addLocationName: String? = nil
+  var addLocationLatitude: CLLocationDegrees? = nil
+  var addLocationLongitude: CLLocationDegrees? = nil
+  
   func addLocation(name: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     addLocationCallCount += 1
+    addLocationName = name
+    addLocationLatitude = latitude
+    addLocationLongitude = longitude
   }
 }

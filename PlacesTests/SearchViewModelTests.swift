@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import Places
 
 final class SearchViewModelTests: XCTestCase {
@@ -48,6 +49,9 @@ final class SearchViewModelTests: XCTestCase {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       if case .idle = self.viewModel.viewState {
         XCTAssertTrue(self.mockLocationAddable.isAddLocationCalled)
+        XCTAssertEqual(self.mockLocationAddable.addLocationName, "Amsterdam")
+        XCTAssertEqual(self.mockLocationAddable.addLocationLatitude, 52.3676)
+        XCTAssertEqual(self.mockLocationAddable.addLocationLongitude, 4.9041)
         expectation.fulfill()
       } else {
         XCTFail()
@@ -55,7 +59,7 @@ final class SearchViewModelTests: XCTestCase {
       }
     }
 
-    waitForExpectations(timeout: 1)
+    waitForExpectations(timeout: 0.1)
   }
   
   func test_add_location_by_coordinates_failure() {
@@ -77,7 +81,54 @@ final class SearchViewModelTests: XCTestCase {
       }
     }
     
-    waitForExpectations(timeout: 1)
+    waitForExpectations(timeout: 0.1)
+  }
+  
+  func test_add_location_by_name_success() {
+    // Given
+    mockReverseGeocodable.mockCoordinate = CLLocationCoordinate2D(latitude: 52.3676, longitude: 4.9041)
+    let expectation = expectation(description: "Location added")
+    
+    // When
+    viewModel.addLocation(name: "Amsterdam")
+    
+    // Then
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .idle = self.viewModel.viewState {
+        XCTAssertTrue(self.mockLocationAddable.isAddLocationCalled)
+        XCTAssertEqual(self.mockLocationAddable.addLocationName, "Amsterdam")
+        XCTAssertEqual(self.mockLocationAddable.addLocationLatitude, 52.3676)
+        XCTAssertEqual(self.mockLocationAddable.addLocationLongitude, 4.9041)
+        expectation.fulfill()
+      } else {
+        XCTFail()
+        expectation.fulfill()
+      }
+    }
+
+    waitForExpectations(timeout: 0.1)
+  }
+  
+  func test_add_location_by_name_failure() {
+    // Given
+    mockReverseGeocodable.error = ReverseGeocodableError.unknownLocation
+    let expectation = expectation(description: "Location error")
+    
+    // When
+    viewModel.addLocation(name: "Amsterdam")
+    
+    // Then
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if case .error(let error) = self.viewModel.viewState {
+        XCTAssertNotNil(error)
+        expectation.fulfill()
+      } else {
+        XCTFail("Expected error state")
+        expectation.fulfill()
+      }
+    }
+    
+    waitForExpectations(timeout: 0.1)
   }
   
   func test_did_tap_geocode_error_confirm() {

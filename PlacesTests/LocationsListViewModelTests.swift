@@ -182,7 +182,7 @@ final class LocationsListViewModelTests: XCTestCase {
       }
     }
     
-    waitForExpectations(timeout: 1)
+    waitForExpectations(timeout: 0.1)
   }
   
   func test_add_location_by_name_duplicate_does_not_add() {
