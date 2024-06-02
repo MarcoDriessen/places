@@ -25,11 +25,14 @@ final class LocationsListViewModel {
   
   private let networkService: NetworkService
   private let urlOpenable: URLOpenable
+  private(set) var searchViewModel: SearchViewModel
   
   init(networkService: NetworkService,
-       urlOpenable: URLOpenable) {
+       urlOpenable: URLOpenable,
+       searchViewModel: SearchViewModel) {
     self.networkService = networkService
     self.urlOpenable = urlOpenable
+    self.searchViewModel = searchViewModel
   }
   
   func fetchLocations() {

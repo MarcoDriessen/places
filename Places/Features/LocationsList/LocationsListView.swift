@@ -11,12 +11,9 @@ import SwiftUI
 struct LocationsListView: View {
   
   @State private var viewModel: LocationsListViewModel
-  private var searchViewModel: SearchViewModel
   
-  init(viewModel: LocationsListViewModel,
-       searchViewModel: SearchViewModel) {
+  init(viewModel: LocationsListViewModel) {
     _viewModel = State(wrappedValue: viewModel)
-    self.searchViewModel = searchViewModel
   }
   
   var body: some View {
@@ -71,7 +68,7 @@ struct LocationsListView: View {
       }
     }
     .sheet(isPresented: $viewModel.showBottomSheet) {
-      SearchView(viewModel: searchViewModel)
+      SearchView(viewModel: viewModel.searchViewModel)
         .presentationDetents([.medium])
     }
   }

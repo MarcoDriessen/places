@@ -19,12 +19,10 @@ final class SearchViewModel {
   
   private(set) var viewState: ViewState = .idle
   private let reverseGeocodable: ReverseGeocodable
-  private weak var locationAddable: LocationAddable?
+  weak var locationAddable: LocationAddable?
   
-  init(reverseGeocodable: ReverseGeocodable,
-       locationAddable: LocationAddable) {
+  init(reverseGeocodable: ReverseGeocodable) {
     self.reverseGeocodable = reverseGeocodable
-    self.locationAddable = locationAddable
   }
   
   func addLocation(latitude: String, longitude: String) {
