@@ -21,8 +21,10 @@ final class SearchViewModelTests: XCTestCase {
     mockLocationAddable = MockLocationAddable()
     
     viewModel = SearchViewModel(
-      reverseGeocodable: mockReverseGeocodable,
-      locationAddable: mockLocationAddable)
+      reverseGeocodable: mockReverseGeocodable
+    )
+    
+    viewModel.locationAddable = mockLocationAddable
   }
   
   override func tearDownWithError() throws {

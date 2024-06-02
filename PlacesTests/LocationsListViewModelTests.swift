@@ -14,15 +14,19 @@ final class LocationsListViewModelTests: XCTestCase {
   var viewModel: LocationsListViewModel!
   var mockNetworkService: MockNetworkService!
   var mockURLOpenable: MockURLOpenable!
+  var searchViewModel: SearchViewModel!
   
   override func setUpWithError() throws {
     try super.setUpWithError()
     mockNetworkService = MockNetworkService()
     mockURLOpenable = MockURLOpenable()
     
+    let mockReverseGeocodable = MockReverseGeocodable()
+    searchViewModel = SearchViewModel(reverseGeocodable: mockReverseGeocodable)
     viewModel = LocationsListViewModel(
       networkService: mockNetworkService,
-      urlOpenable: mockURLOpenable
+      urlOpenable: mockURLOpenable, 
+      searchViewModel: searchViewModel
     )
   }
   
@@ -30,6 +34,7 @@ final class LocationsListViewModelTests: XCTestCase {
     viewModel = nil
     mockNetworkService = nil
     mockURLOpenable = nil
+    searchViewModel = nil
     try super.tearDownWithError()
   }
   
